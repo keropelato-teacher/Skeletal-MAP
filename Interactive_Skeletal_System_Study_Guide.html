@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="vitals">
+  <title>MAP Unit 5: Skeletal System Interactive Study Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      /* Vitals Theme Palette */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+      --primary: #0f7c8a;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Typography */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Shapes & Effects */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 3px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.06);
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.55;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      border-top: var(--top-bar);
+    }
+
+    /* Container & Layout */
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-md) var(--space-2xl);
+    }
+
+    /* Header & Progress Tracker */
+    .header-banner {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      box-shadow: var(--card-lift);
+      position: relative;
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-full);
+      margin-bottom: var(--space-xs);
+    }
+
+    .header-title {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 800;
+      color: var(--on-surface);
+      line-height: 1.2;
+      margin-bottom: var(--space-xs);
+    }
+
+    .header-desc {
+      color: var(--on-surface-variant);
+      font-size: var(--body-size);
+      max-width: 75ch;
+      margin-bottom: var(--space-md);
+    }
+
+    .tracker-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: 5px solid var(--tertiary);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .tracker-stats {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--on-surface-variant);
+      font-weight: 700;
+    }
+
+    .stat-val {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .progress-bar-wrap {
+      flex: 1 1 240px;
+    }
+
+    .progress-track {
+      background: var(--surface-container-high);
+      height: 10px;
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+      margin-top: var(--space-xs);
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--primary), var(--tertiary));
+      height: 100%;
+      width: 0%;
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* Standard Navigation Bar */
+    .nav-tabs {
+      display: flex;
+      gap: var(--space-xs);
+      overflow-x: auto;
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      border-bottom: 2px solid var(--surface-container-high);
+      scrollbar-width: thin;
+    }
+
+    .nav-btn {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      white-space: nowrap;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-full);
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro), color var(--dur-micro), border-color var(--dur-micro);
+    }
+
+    .nav-btn:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .nav-btn.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Standard Sections */
+    .std-section {
+      display: none;
+      animation: fadeIn var(--dur-short) var(--ease-out);
+    }
+
+    .std-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .section-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      color: var(--on-surface);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .section-tag {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: var(--label-size);
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--rounded-full);
+      text-transform: uppercase;
+    }
+
+    /* Cards & Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .card {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      box-shadow: var(--card-lift);
+      position: relative;
+    }
+
+    .card-accent {
+      border-left: var(--status-bar-width) solid var(--primary);
+    }
+
+    .card-success {
+      border-left: var(--status-bar-width) solid var(--tertiary);
+    }
+
+    .card-warn {
+      border-left: var(--status-bar-width) solid var(--warning);
+    }
+
+    .card-title {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      color: var(--on-surface);
+      margin-bottom: var(--space-xs);
+    }
+
+    .card-desc {
+      font-size: var(--body-size);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Interactive UI Elements */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 700;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background-color var(--dur-micro), box-shadow var(--dur-micro);
+    }
+
+    .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover {
+      background: #0a5f69;
+    }
+
+    .btn-secondary {
+      background: var(--surface-container);
+      color: var(--on-primary-container);
+      border-color: var(--outline-variant);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--surface-container-low);
+    }
+
+    .btn-sm {
+      padding: var(--space-xs) var(--space-sm);
+      min-height: 36px;
+      font-size: var(--label-size);
+    }
+
+    /* Quiz Option Items */
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin: var(--space-sm) 0 var(--space-md);
+    }
+
+    .option-btn {
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--background);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--on-surface);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color var(--dur-micro), border-color var(--dur-micro);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: var(--surface-container);
+      font-weight: 700;
+    }
+
+    .option-btn.correct {
+      background: #e8f5e9;
+      border-color: var(--tertiary);
+      color: #1b5e20;
+      font-weight: 700;
+    }
+
+    .option-btn.incorrect {
+      background: #ffebee;
+      border-color: var(--error);
+      color: #b71c1c;
+    }
+
+    .feedback-box {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-size: var(--body-size);
+      margin-top: var(--space-sm);
+      display: none;
+    }
+    .feedback-box.show {
+      display: block;
+    }
+    .feedback-correct {
+      background: #e8f5e9;
+      border-left: 4px solid var(--tertiary);
+      color: #1b5e20;
+    }
+    .feedback-wrong {
+      background: #ffebee;
+      border-left: 4px solid var(--error);
+      color: #b71c1c;
+    }
+
+    /* Fill In The Blank Styling */
+    .fib-input {
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      padding: var(--space-xs) var(--space-sm);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--on-surface);
+      background: var(--background);
+      min-width: 130px;
+      margin: 0 4px;
+    }
+    .fib-input.correct {
+      border-color: var(--tertiary);
+      background: #e8f5e9;
+      color: #1b5e20;
+      font-weight: bold;
+    }
+    .fib-input.incorrect {
+      border-color: var(--error);
+      background: #ffebee;
+      color: #b71c1c;
+    }
+
+    /* Matching Pairs Game Grid */
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .match-item {
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--background);
+      cursor: pointer;
+      font-size: var(--body-size);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      transition: all var(--dur-micro);
+      user-select: none;
+    }
+    .match-item:hover {
+      background: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+    .match-item.active-term {
+      border-color: var(--primary);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 700;
+    }
+    .match-item.matched {
+      background: #e8f5e9;
+      border-color: var(--tertiary);
+      color: #1b5e20;
+      cursor: default;
+      font-weight: 700;
+    }
+
+    /* Interactive Diagram Hotspots */
+    .diagram-container {
+      position: relative;
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      text-align: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .bone-svg {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.06));
+    }
+
+    .hotspot {
+      cursor: pointer;
+      transition: fill 0.2s, stroke 0.2s;
+    }
+    .hotspot:hover {
+      fill: #ffca28 !important;
+      stroke: #f57f17 !important;
+      stroke-width: 3px !important;
+    }
+    .hotspot.active-spot {
+      fill: var(--primary) !important;
+      stroke: #0a5560 !important;
+      stroke-width: 3px !important;
+    }
+
+    /* Step Sequence Ordering Component */
+    .order-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
+    }
+    .order-item {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      cursor: grab;
+    }
+    .order-item.selected-order {
+      background: var(--surface-container-high);
+      border-color: var(--primary);
+    }
+    .order-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--label-size);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .order-text {
+      flex: 1;
+      font-size: var(--body-size);
+    }
+    .order-ctrls {
+      display: flex;
+      gap: 4px;
+    }
+
+    /* Clinical Disorders Case Viewer */
+    .case-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: var(--rounded-full);
+      font-size: var(--label-size);
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+      text-transform: uppercase;
+    }
+    .badge-autoimmune { background: #ffebee; color: #b71c1c; }
+    .badge-deg { background: #fff3e0; color: #e65100; }
+    .badge-metabolic { background: #e0f2f1; color: #004d40; }
+    .badge-congenital { background: #f3e5f5; color: #4a148c; }
+    .badge-curvature { background: #e8eaf6; color: #1a237e; }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin-bottom: var(--space-md);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--body-size);
+      text-align: left;
+    }
+    .data-table th {
+      background: var(--surface-container);
+      font-family: var(--font-label);
+      font-weight: 700;
+      color: var(--on-surface);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 2px solid var(--outline-variant);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .data-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+    }
+    .data-table tr:hover {
+      background: var(--surface-container-low);
+    }
+
+    /* Homeostasis Interactive Slider Box */
+    .slider-box {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      margin-top: var(--space-sm);
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-sm);
+    }
+    .range-input {
+      flex: 1;
+      height: 8px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Sorter Bucket Matrix */
+    .bucket-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-sm);
+    }
+    .bucket {
+      background: var(--surface-container-low);
+      border: 2px dashed var(--outline);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+    }
+    .bucket.drag-over {
+      background: var(--surface-container-high);
+      border-color: var(--primary);
+    }
+    .bucket-header {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      color: var(--primary);
+      margin-bottom: var(--space-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bucket-items {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .sorter-chip {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: 6px 12px;
+      font-size: var(--label-size);
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sorter-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      background: var(--surface-container);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Joint Movements Simulator Canvas */
+    .joint-canvas-card {
+      text-align: center;
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      margin-top: var(--space-sm);
+    }
+    .movement-pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      justify-content: center;
+      margin: var(--space-sm) 0;
+    }
+
+    /* Modal / Certificate Popup */
+    .cert-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 43, 51, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+    }
+    .cert-overlay.show {
+      display: flex;
+    }
+    .cert-box {
+      background: var(--background);
+      border-radius: var(--rounded-lg);
+      border: 3px solid var(--tertiary);
+      max-width: 600px;
+      width: 100%;
+      padding: var(--space-xl);
+      text-align: center;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2, .match-grid {
+        grid-template-columns: 1fr;
+      }
+      .tracker-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .tracker-stats {
+        justify-content: space-between;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header with Mastery Tracker -->
+    <header class="header-banner">
+      <span class="header-badge">Utah MAP Strand 5 Curriculum Mastery Guide</span>
+      <h1 class="header-title">Unit 5: Skeletal System Interactive Study Guide</h1>
+      <p class="header-desc">
+        A clinical & anatomical exploration of bone biology, skeletal divisions, articulations, and pathology. Complete the interactive challenges, diagnostic scenarios, and knowledge checks below to prove mastery across all 11 state standards.
+      </p>
+
+      <div class="tracker-card">
+        <div class="tracker-stats">
+          <div class="stat-box">
+            <span class="stat-label">Standards Mastered</span>
+            <span class="stat-val" id="stat-standards-count">0 / 11</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Interactive Score</span>
+            <span class="stat-val" id="stat-points-val">0 pts</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Mastery Level</span>
+            <span class="stat-val" id="stat-level-text" style="color: var(--tertiary); font-size: 1.15rem;">Novice Student</span>
+          </div>
+        </div>
+
+        <div class="progress-bar-wrap">
+          <div style="display: flex; justify-content: space-between; font-size: var(--label-size); font-weight: 700; color: var(--on-surface-variant);">
+            <span>OVERALL STRAND COMPLETION</span>
+            <span id="stat-percent-text">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="global-progress-fill"></div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-outline btn-sm" onclick="resetAllProgress()">Reset Progress</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" aria-label="Skeletal System Standards Navigation" id="nav-tabs-bar">
+      <button class="nav-btn active" onclick="switchSection('std1-2')">Std 1 & 2: Functions & Cells</button>
+      <button class="nav-btn" onclick="switchSection('std3-4')">Std 3 & 4: Shapes & Long Bone</button>
+      <button class="nav-btn" onclick="switchSection('std5-6')">Std 5 & 6: Markings & Skull</button>
+      <button class="nav-btn" onclick="switchSection('std7')">Std 7: Axial & Appendicular</button>
+      <button class="nav-btn" onclick="switchSection('std8')">Std 8: Vertebral Column</button>
+      <button class="nav-btn" onclick="switchSection('std9-10')">Std 9 & 10: Joints & Ligaments</button>
+      <button class="nav-btn" onclick="switchSection('std11')">Std 11: Disorders & Diseases</button>
+      <button class="nav-btn" onclick="switchSection('mastery')">Mastery Exam</button>
+    </nav>
+
+    <!-- ==================== SECTION: STANDARDS 1 & 2 ==================== -->
+    <section id="sec-std1-2" class="std-section active">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standards 1 & 2: Skeletal Functions, Hematopoiesis & Bone Remodeling</span>
+            <span class="section-tag">Homeostasis & Cytology</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Examine how bones provide support, levers for movement, active hematopoiesis, and dynamic mineral storage regulated by osteoblasts, osteoclasts, and osteocytes.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Interactive 1: Bone Cell Triad Matcher -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 1.1: Bone Cell Cytology Matcher</h3>
+          <p class="card-desc">Click a cell name, then select its physiological role in bone remodeling.</p>
+
+          <div class="match-grid" id="cell-matcher-box">
+            <div class="match-col" id="cell-col-terms">
+              <div class="match-item" id="c-cell-1" onclick="selectCellTerm(1)">Osteoblast</div>
+              <div class="match-item" id="c-cell-2" onclick="selectCellTerm(2)">Osteocyte</div>
+              <div class="match-item" id="c-cell-3" onclick="selectCellTerm(3)">Osteoclast</div>
+            </div>
+            <div class="match-col" id="cell-col-defs">
+              <div class="match-item" id="c-def-2" onclick="selectCellDef(2)">Mature bone cell inside lacunae; monitors mechanical stress & maintains bone matrix</div>
+              <div class="match-item" id="c-def-3" onclick="selectCellDef(3)">Multinucleated bone-resorbing cell derived from fused monocytes; secretes acid & enzymes to dissolve matrix</div>
+              <div class="match-item" id="c-def-1" onclick="selectCellDef(1)">Bone-building cell that deposits collagen & osteoid matrix during ossification and repair</div>
+            </div>
+          </div>
+          <div id="cell-feedback" class="feedback-box"></div>
+        </div>
+
+        <!-- Interactive 2: Calcium Homeostasis Regulator Simulator -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 1.2: Calcium Homeostatic Feedback Loop</h3>
+          <p class="card-desc">Simulate blood calcium shifts to test hormonal responses between Parathyroid Hormone (PTH) and Calcitonin.</p>
+
+          <div class="slider-box">
+            <div class="slider-row">
+              <label for="ca-slider" style="font-weight: 700; min-width: 140px; font-size: var(--label-size); text-transform: uppercase;">
+                Blood Ca²⁺ Level:
+              </label>
+              <input type="range" id="ca-slider" class="range-input" min="7.0" max="13.0" step="0.5" value="9.8" oninput="updateCaSimulator()">
+              <span id="ca-val-badge" style="font-weight: 800; font-size: 1.1rem; color: var(--primary); min-width: 80px; text-align: right;">9.8 mg/dL</span>
+            </div>
+
+            <div id="ca-sim-status" style="margin-top: var(--space-sm); padding: var(--space-sm); border-radius: var(--rounded); background: var(--background); border: 1px solid var(--outline-variant); font-size: var(--body-size);">
+              <strong>Normal Physiological Range (8.5–10.5 mg/dL):</strong> Dynamic equilibrium maintained. Osteoblast deposition balances osteoclast resorption.
+            </div>
+
+            <div style="margin-top: var(--space-sm); display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="setCaValue(7.5)">Simulate Hypocalcemia</button>
+              <button class="btn btn-secondary btn-sm" onclick="setCaValue(9.8)">Normal Equilibrium</button>
+              <button class="btn btn-secondary btn-sm" onclick="setCaValue(12.5)">Simulate Hypercalcemia</button>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-sm); font-size: var(--label-size); color: var(--on-surface-variant);">
+            <em>Key concept:</em> 3% to 5% of adult bone calcium is exchanged each year!
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive 3: Standard 1 & 2 Fill-in-the-Blank Concept Check -->
+      <div class="card">
+        <h3 class="card-title">Activity 1.3: Functions of Bone & Marrow Check</h3>
+        <p class="card-desc">Type the exact physiological terms into each blank, then click Check Answers.</p>
+
+        <div style="line-height: 2; font-size: var(--body-size);" id="fib-sec1">
+          1. The process of blood cell production is called
+          <input type="text" id="fib-1" class="fib-input" placeholder="Term..." autocomplete="off">. In adults, this occurs primarily within
+          <input type="text" id="fib-2" class="fib-input" placeholder="Marrow type..." autocomplete="off"> marrow.
+          <br>
+          2. The yellow bone marrow serves as a key storage site for
+          <input type="text" id="fib-3" class="fib-input" placeholder="Storage substance..." autocomplete="off">.
+          <br>
+          3. When blood calcium levels fall too low, the parathyroid glands release
+          <input type="text" id="fib-4" class="fib-input" placeholder="Hormone..." autocomplete="off"> (PTH), which directly activates
+          <input type="text" id="fib-5" class="fib-input" placeholder="Cell type..." autocomplete="off"> to dissolve mineral matrix and release ions into the blood.
+          <br>
+          4. Physical exercise pulling on muscular attachments stresses bones, stimulating bone tissue to
+          <input type="text" id="fib-6" class="fib-input" placeholder="thicken/weaken..." autocomplete="off">.
+        </div>
+
+        <div style="margin-top: var(--space-md); display: flex; gap: var(--space-sm); align-items: center;">
+          <button class="btn btn-primary" onclick="checkFIBSection1()">Verify Answers</button>
+          <span id="fib-sec1-msg" style="font-weight: 700; font-size: var(--body-size);"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STANDARDS 3 & 4 ==================== -->
+    <section id="sec-std3-4" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standards 3 & 4: Bone Shapes & Long Bone Architecture</span>
+            <span class="section-tag">Macroscopic & Microscopic Anatomy</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Classify bones into long, short, flat, irregular, and sesamoid; explore macroscopic long bone parts and osteon histology.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Interactive 4: Bone Shape Sorter -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 3.1: Bone Shape Sorting Matrix</h3>
+          <p class="card-desc">Click each bone from the tray below to place it into its correct morphological category:</p>
+
+          <div class="sorter-pool" id="bone-shape-pool">
+            <span class="sorter-chip" id="b-femur" onclick="sortBoneShape('femur', 'long')">Femur</span>
+            <span class="sorter-chip" id="b-patella" onclick="sortBoneShape('patella', 'sesamoid')">Patella</span>
+            <span class="sorter-chip" id="b-carpal" onclick="sortBoneShape('carpal', 'short')">Carpal (Trapezium)</span>
+            <span class="sorter-chip" id="b-vertebra" onclick="sortBoneShape('vertebra', 'irregular')">Lumbar Vertebra</span>
+            <span class="sorter-chip" id="b-scapula" onclick="sortBoneShape('scapula', 'flat')">Scapula</span>
+            <span class="sorter-chip" id="b-humerus" onclick="sortBoneShape('humerus', 'long')">Humerus</span>
+            <span class="sorter-chip" id="b-parietal" onclick="sortBoneShape('parietal', 'flat')">Parietal Bone</span>
+            <span class="sorter-chip" id="b-calcaneus" onclick="sortBoneShape('calcaneus', 'short')">Tarsal (Calcaneus)</span>
+            <span class="sorter-chip" id="b-sphenoid" onclick="sortBoneShape('sphenoid', 'irregular')">Sphenoid Bone</span>
+            <span class="sorter-chip" id="b-sternum" onclick="sortBoneShape('sternum', 'flat')">Sternum</span>
+          </div>
+
+          <div class="bucket-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="bucket" id="bucket-long">
+              <div class="bucket-header">Long Bones <span style="font-size: 0.8rem; font-weight: normal;">(Elongated shaft + expanded ends)</span></div>
+              <div class="bucket-items" id="items-long"></div>
+            </div>
+            <div class="bucket" id="bucket-short">
+              <div class="bucket-header">Short & Sesamoid <span style="font-size: 0.8rem; font-weight: normal;">(Cube-like / nodular)</span></div>
+              <div class="bucket-items" id="items-short"></div>
+            </div>
+            <div class="bucket" id="bucket-flat">
+              <div class="bucket-header">Flat Bones <span style="font-size: 0.8rem; font-weight: normal;">(Platelike broad surfaces)</span></div>
+              <div class="bucket-items" id="items-flat"></div>
+            </div>
+            <div class="bucket" id="bucket-irregular">
+              <div class="bucket-header">Irregular Bones <span style="font-size: 0.8rem; font-weight: normal;">(Complex shapes & joints)</span></div>
+              <div class="bucket-items" id="items-irregular"></div>
+            </div>
+          </div>
+          <div id="shape-feedback" class="feedback-box" style="margin-top: var(--space-sm);"></div>
+        </div>
+
+        <!-- Interactive 5: Interactive Long Bone Anatomy Explorer -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 4.1: Long Bone Anatomical Explorer</h3>
+          <p class="card-desc">Click any highlighted anatomical zone on the diagram to inspect its clinical and functional anatomy.</p>
+
+          <div class="diagram-container">
+            <svg class="bone-svg" viewBox="0 0 460 300" width="100%" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of Long Bone Anatomy">
+              <!-- Articular Cartilage Epiphysis Proximal -->
+              <path class="hotspot" id="hs-articular" d="M 50 110 C 50 70, 90 60, 110 70 C 130 60, 150 90, 140 120 Z" fill="#b2ebf2" stroke="#00838f" stroke-width="2" onclick="showHotspotInfo('articular')"/>
+              
+              <!-- Proximal Epiphysis & Spongy bone -->
+              <path class="hotspot" id="hs-epiphysis" d="M 60 120 C 50 160, 130 160, 130 120 Z" fill="#ffe0b2" stroke="#e65100" stroke-width="2" onclick="showHotspotInfo('epiphysis')"/>
+              
+              <!-- Epiphyseal Line/Plate -->
+              <line class="hotspot" id="hs-plate" x1="60" y1="135" x2="130" y2="135" stroke="#d81b60" stroke-width="5" stroke-dasharray="3 3" onclick="showHotspotInfo('plate')"/>
+              
+              <!-- Diaphysis Shaft Outer Wall (Compact bone) -->
+              <rect class="hotspot" id="hs-compact" x="70" y="150" width="20" height="110" fill="#cfd8dc" stroke="#455a64" stroke-width="2" onclick="showHotspotInfo('compact')"/>
+              <rect class="hotspot" id="hs-compact2" x="110" y="150" width="20" height="110" fill="#cfd8dc" stroke="#455a64" stroke-width="2" onclick="showHotspotInfo('compact')"/>
+              
+              <!-- Medullary Cavity & Yellow Marrow -->
+              <rect class="hotspot" id="hs-medullary" x="90" y="150" width="20" height="110" fill="#fff59d" stroke="#fbc02d" stroke-width="1.5" onclick="showHotspotInfo('medullary')"/>
+
+              <!-- Periosteum Outer Sheath -->
+              <path class="hotspot" id="hs-periosteum" d="M 65 145 L 65 265 M 135 145 L 135 265" stroke="#0f7c8a" stroke-width="4" fill="none" onclick="showHotspotInfo('periosteum')"/>
+
+              <!-- Labels / Callout text -->
+              <text x="160" y="85" font-family="Figtree" font-size="12" font-weight="bold" fill="#00838f">Articular Cartilage (Hyaline)</text>
+              <line x1="135" y1="85" x2="155" y2="85" stroke="#00838f" stroke-width="1"/>
+
+              <text x="160" y="125" font-family="Figtree" font-size="12" font-weight="bold" fill="#e65100">Epiphysis (Spongy Bone + Red Marrow)</text>
+              <line x1="125" y1="125" x2="155" y2="125" stroke="#e65100" stroke-width="1"/>
+
+              <text x="160" y="140" font-family="Figtree" font-size="12" font-weight="bold" fill="#d81b60">Epiphyseal Plate / Growth Line</text>
+              <line x1="130" y1="140" x2="155" y2="140" stroke="#d81b60" stroke-width="1"/>
+
+              <text x="160" y="180" font-family="Figtree" font-size="12" font-weight="bold" fill="#455a64">Compact Bone Wall (Cortical)</text>
+              <line x1="125" y1="180" x2="155" y2="180" stroke="#455a64" stroke-width="1"/>
+
+              <text x="160" y="210" font-family="Figtree" font-size="12" font-weight="bold" fill="#f57f17">Medullary Cavity (Yellow Marrow & Endosteum)</text>
+              <line x1="105" y1="210" x2="155" y2="210" stroke="#f57f17" stroke-width="1"/>
+
+              <text x="160" y="250" font-family="Figtree" font-size="12" font-weight="bold" fill="#0f7c8a">Periosteum (Dense Connective Sheath)</text>
+              <line x1="135" y1="250" x2="155" y2="250" stroke="#0f7c8a" stroke-width="1"/>
+            </svg>
+          </div>
+
+          <div id="hotspot-display-card" style="background: var(--surface-container); border-radius: var(--rounded); padding: var(--space-sm) var(--space-md); border-left: 4px solid var(--primary);">
+            <h4 id="hs-title" style="font-family: var(--font-headline); color: var(--primary);">Click any part on the bone diagram above</h4>
+            <p id="hs-desc" style="font-size: var(--body-size); margin-top: 4px;">Click the Articular cartilage, Epiphysis, Growth plate, Compact bone, Medullary cavity, or Periosteum to read its key histological details.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive 6: Microscopic Histology Knowledge Check -->
+      <div class="card">
+        <h3 class="card-title">Activity 4.2: Osteon Microscopic Histology Mastery</h3>
+        <p class="card-desc">Select the correct histological term matching each microscopic feature of compact bone.</p>
+
+        <div class="grid-2" style="margin-bottom: 0;">
+          <div style="background: var(--surface-container-low); padding: var(--space-md); border-radius: var(--rounded);">
+            <p style="font-weight: 700; margin-bottom: var(--space-xs);">1. The functional cylinder-shaped structural unit of compact bone:</p>
+            <div class="option-list" id="q-histo-1">
+              <button class="option-btn" onclick="checkHistoQ(1, 'A', this)">A. Trabecula</button>
+              <button class="option-btn" onclick="checkHistoQ(1, 'B', this)">B. Osteon (Haversian System)</button>
+              <button class="option-btn" onclick="checkHistoQ(1, 'C', this)">C. Canaliculus</button>
+            </div>
+            <div id="histo-fb-1" class="feedback-box"></div>
+          </div>
+
+          <div style="background: var(--surface-container-low); padding: var(--space-md); border-radius: var(--rounded);">
+            <p style="font-weight: 700; margin-bottom: var(--space-xs);">2. Microscopic canals through which osteocyte processes connect and communicate:</p>
+            <div class="option-list" id="q-histo-2">
+              <button class="option-btn" onclick="checkHistoQ(2, 'A', this)">A. Canaliculi</button>
+              <button class="option-btn" onclick="checkHistoQ(2, 'B', this)">B. Perforating (Volkmann's) canals</button>
+              <button class="option-btn" onclick="checkHistoQ(2, 'C', this)">C. Lacunae</button>
+            </div>
+            <div id="histo-fb-2" class="feedback-box"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STANDARDS 5 & 6 ==================== -->
+    <section id="sec-std5-6" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standards 5 & 6: Bone Markings & Skull Development</span>
+            <span class="section-tag">Anatomical Landmarks & Sutures</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Master definitions and clinical examples of all 9 required bone markings, plus differentiate fetal fontanels from adult immovable sutures.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Interactive 7: Bone Markings Interactive Glossary & Matcher -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 5.1: Bone Markings Clinical Matcher</h3>
+          <p class="card-desc">Match each bone marking with its official definition and standard textbook anatomical example.</p>
+
+          <div style="margin-bottom: var(--space-sm);">
+            <label for="marking-select" style="font-weight: 700; font-size: var(--label-size); text-transform: uppercase;">Select Bone Marking:</label>
+            <select id="marking-select" class="fib-input" style="width: 100%; margin-top: 4px;" onchange="inspectMarking()">
+              <option value="foramen">Foramen</option>
+              <option value="meatus">Meatus</option>
+              <option value="sinus">Sinus</option>
+              <option value="fossa">Fossa</option>
+              <option value="condyle">Condyle</option>
+              <option value="tuberosity">Tuberosity</option>
+              <option value="trochanter">Trochanter</option>
+              <option value="tubercle">Tubercle</option>
+              <option value="process">Process</option>
+            </select>
+          </div>
+
+          <div id="marking-details-box" style="background: var(--surface-container-low); border: 1px solid var(--outline-variant); border-radius: var(--rounded); padding: var(--space-md);">
+            <div style="font-weight: 800; font-size: 1.15rem; color: var(--primary);" id="marking-name">Foramen</div>
+            <div style="margin-top: 4px; font-size: var(--body-size);" id="marking-def"><strong>Definition:</strong> Opening through a bone that usually serves as a passageway for blood vessels, nerves, or ligaments.</div>
+            <div style="margin-top: 4px; font-size: var(--body-size); color: var(--tertiary);" id="marking-ex"><strong>Textbook Example:</strong> Foramen magnum of occipital bone; mental foramen of mandible.</div>
+          </div>
+
+          <div style="margin-top: var(--space-md);">
+            <h4 style="font-size: var(--subhead-size); margin-bottom: var(--space-xs);">Quick Challenge: Markings Flash Quiz</h4>
+            <p style="font-size: var(--body-size);">"A very large, blunt process found exclusively on the proximal femur for hip and buttock muscle attachments":</p>
+            <div style="display: flex; gap: var(--space-xs); margin-top: var(--space-xs); flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="checkMarkingQuiz('tubercle', this)">Tubercle</button>
+              <button class="btn btn-secondary btn-sm" onclick="checkMarkingQuiz('trochanter', this)">Trochanter</button>
+              <button class="btn btn-secondary btn-sm" onclick="checkMarkingQuiz('condyle', this)">Condyle</button>
+              <button class="btn btn-secondary btn-sm" onclick="checkMarkingQuiz('tuberosity', this)">Tuberosity</button>
+            </div>
+            <div id="marking-quiz-fb" class="feedback-box"></div>
+          </div>
+        </div>
+
+        <!-- Interactive 8: Suture vs. Fontanel Comparative Analysis -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 6.1: Suture vs. Fontanel Distinction</h3>
+          <p class="card-desc">Compare the architecture, ossification state, and function of skull junctions in infants versus adults.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Fontanel ("Soft Spot")</th>
+                  <th>Suture</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Stage of Life</strong></td>
+                  <td>Fetal and Infantile (birth to ~2 yrs)</td>
+                  <td>Adult and older child</td>
+                </tr>
+                <tr>
+                  <td><strong>Tissue Type</strong></td>
+                  <td>Fibrous connective membranes (incomplete ossification)</td>
+                  <td>Dense connective tissue binding interlocked bone margins</td>
+                </tr>
+                <tr>
+                  <td><strong>Primary Function</strong></td>
+                  <td>Compressibility during birth canal passage; rapid brain growth</td>
+                  <td>Immovable protection (synarthrotic union) of the mature brain</td>
+                </tr>
+                <tr>
+                  <td><strong>Examples</strong></td>
+                  <td>Anterior, Posterior, Mastoid, Sphenoid fontanels</td>
+                  <td>Coronal, Sagittal, Lambdoid, Squamous sutures</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background: var(--surface-container-low); padding: var(--space-sm) var(--space-md); border-radius: var(--rounded);">
+            <p style="font-weight: 700; font-size: var(--body-size); margin-bottom: var(--space-xs);">Mastery Check: Why do fontanels exist in neonates?</p>
+            <div class="option-list" style="margin-bottom: 0;">
+              <button class="option-btn" onclick="checkFontanelQ(false, this)">A. To allow voluntary movement of cranial bones during chewing</button>
+              <button class="option-btn" onclick="checkFontanelQ(true, this)">B. To allow the skull to compress safely during vaginal birth and accommodate rapid brain growth</button>
+              <button class="option-btn" onclick="checkFontanelQ(false, this)">C. To store excess calcium for tooth eruption</button>
+            </div>
+            <div id="fontanel-fb" class="feedback-box"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STANDARD 7 ==================== -->
+    <section id="sec-std7" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standard 7: Axial vs. Appendicular Skeletons (206 Adult Bones)</span>
+            <span class="section-tag">Anatomical Division & Inventory</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Differentiate the 80 bones of the Axial Skeleton (head, neck, and trunk) from the 126 bones of the Appendicular Skeleton (girdles and limbs).
+          </p>
+        </div>
+      </div>
+
+      <!-- Sorter Bucket Challenge -->
+      <div class="card card-accent" style="margin-bottom: var(--space-md);">
+        <h3 class="card-title">Activity 7.1: Master Skeletal Sorter Challenge</h3>
+        <p class="card-desc">Click any bone card in the tray below to categorize it into either the Axial (Orange) or Appendicular (Yellow) division.</p>
+
+        <div class="sorter-pool" id="skel-sorter-pool">
+          <span class="sorter-chip" id="sk-mandible" onclick="sortSkelBone('mandible', 'axial')">Mandible</span>
+          <span class="sorter-chip" id="sk-clavicle" onclick="sortSkelBone('clavicle', 'appendicular')">Clavicle</span>
+          <span class="sorter-chip" id="sk-sphenoid" onclick="sortSkelBone('sphenoid', 'axial')">Sphenoid</span>
+          <span class="sorter-chip" id="sk-femur" onclick="sortSkelBone('femur', 'appendicular')">Femur</span>
+          <span class="sorter-chip" id="sk-sternum" onclick="sortSkelBone('sternum', 'axial')">Sternum</span>
+          <span class="sorter-chip" id="sk-scapula" onclick="sortSkelBone('scapula', 'appendicular')">Scapula</span>
+          <span class="sorter-chip" id="sk-hyoid" onclick="sortSkelBone('hyoid', 'axial')">Hyoid Bone</span>
+          <span class="sorter-chip" id="sk-ilium" onclick="sortSkelBone('ilium', 'appendicular')">Pelvic Coxal (Ilium)</span>
+          <span class="sorter-chip" id="sk-tibia" onclick="sortSkelBone('tibia', 'appendicular')">Tibia</span>
+          <span class="sorter-chip" id="sk-temporal" onclick="sortSkelBone('temporal', 'axial')">Temporal Bone</span>
+          <span class="sorter-chip" id="sk-radius" onclick="sortSkelBone('radius', 'appendicular')">Radius</span>
+          <span class="sorter-chip" id="sk-ribs" onclick="sortSkelBone('ribs', 'axial')">Ribs (12 pairs)</span>
+        </div>
+
+        <div class="bucket-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="bucket" id="bucket-axial" style="border-color: #e65100; background: #fff8e1;">
+            <div class="bucket-header" style="color: #e65100;">
+              <span>Axial Skeleton (80 bones)</span>
+              <span id="axial-count-badge" style="font-size: 0.85rem; font-weight: normal;">0 / 6 items</span>
+            </div>
+            <p style="font-size: var(--label-size); color: #795548; margin-bottom: var(--space-xs);">Skull, Hyoid, Vertebral column, Thoracic cage (Ribs & Sternum)</p>
+            <div class="bucket-items" id="items-axial"></div>
+          </div>
+
+          <div class="bucket" id="bucket-appendicular" style="border-color: var(--primary); background: #e0f2f1;">
+            <div class="bucket-header" style="color: var(--primary);">
+              <span>Appendicular Skeleton (126 bones)</span>
+              <span id="app-count-badge" style="font-size: 0.85rem; font-weight: normal;">0 / 6 items</span>
+            </div>
+            <p style="font-size: var(--label-size); color: #004d40; margin-bottom: var(--space-xs);">Pectoral girdle, Upper limbs, Pelvic girdle, Lower limbs</p>
+            <div class="bucket-items" id="items-appendicular"></div>
+          </div>
+        </div>
+        <div id="skel-sort-feedback" class="feedback-box" style="margin-top: var(--space-sm);"></div>
+      </div>
+
+      <!-- Specific Bone Landmarks & Locations Diagnostic Grid -->
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="card-title">Activity 7.2: Cranial & Facial Anatomy Check</h3>
+          <p class="card-desc">Identify the 8 cranial and 14 facial bones and their unique landmarks:</p>
+          <div class="option-list">
+            <p style="font-size: var(--body-size); margin-bottom: 4px;"><strong>Q1:</strong> Which cranial bone houses the sella turcica (cradle for the pituitary gland) and forms part of the cranial floor and orbit?</p>
+            <button class="option-btn" onclick="checkBoneIdentify(1, 'A', this)">A. Ethmoid bone</button>
+            <button class="option-btn" onclick="checkBoneIdentify(1, 'B', this)">B. Sphenoid bone</button>
+            <button class="option-btn" onclick="checkBoneIdentify(1, 'C', this)">C. Temporal bone</button>
+            <div id="bone-id-fb-1" class="feedback-box"></div>
+          </div>
+
+          <div class="option-list" style="margin-top: var(--space-md);">
+            <p style="font-size: var(--body-size); margin-bottom: 4px;"><strong>Q2:</strong> What single, movable bone of the skull features the mandibular condyle that articulates with the mandibular fossa of the temporal bone?</p>
+            <button class="option-btn" onclick="checkBoneIdentify(2, 'A', this)">A. Maxilla</button>
+            <button class="option-btn" onclick="checkBoneIdentify(2, 'B', this)">B. Zygomatic bone</button>
+            <button class="option-btn" onclick="checkBoneIdentify(2, 'C', this)">C. Mandible</button>
+            <div id="bone-id-fb-2" class="feedback-box"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Activity 7.3: Appendicular Girdles & Limbs</h3>
+          <p class="card-desc">Identify key bone relationships of the upper and lower extremities:</p>
+
+          <div class="option-list">
+            <p style="font-size: var(--body-size); margin-bottom: 4px;"><strong>Q3:</strong> The hip (coxal) bone is formed by the embryonic fusion of which three bones at the acetabulum?</p>
+            <button class="option-btn" onclick="checkBoneIdentify(3, 'A', this)">A. Sacrum, Coccyx, and Ilium</button>
+            <button class="option-btn" onclick="checkBoneIdentify(3, 'B', this)">B. Ilium, Ischium, and Pubis</button>
+            <button class="option-btn" onclick="checkBoneIdentify(3, 'C', this)">C. Femur, Patella, and Tibia</button>
+            <div id="bone-id-fb-3" class="feedback-box"></div>
+          </div>
+
+          <div class="option-list" style="margin-top: var(--space-md);">
+            <p style="font-size: var(--body-size); margin-bottom: 4px;"><strong>Q4:</strong> Which leg bone is located on the lateral side, articulates with the tibia and ankle, but does NOT bear body weight?</p>
+            <button class="option-btn" onclick="checkBoneIdentify(4, 'A', this)">A. Fibula</button>
+            <button class="option-btn" onclick="checkBoneIdentify(4, 'B', this)">B. Tibia</button>
+            <button class="option-btn" onclick="checkBoneIdentify(4, 'C', this)">C. Radius</button>
+            <div id="bone-id-fb-4" class="feedback-box"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STANDARD 8 ==================== -->
+    <section id="sec-std8" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standard 8: The Five Vertebral Groups</span>
+            <span class="section-tag">Count, Location & Structural Adaptations</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Master the average number, anatomic region, and distinct specialized features of Cervical, Thoracic, Lumbar, Sacral, and Coccygeal vertebrae.
+          </p>
+        </div>
+      </div>
+
+      <!-- Vertebral Group Master Table -->
+      <div class="card" style="margin-bottom: var(--space-md);">
+        <h3 class="card-title">Vertebral Group Comparison Reference</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Count</th>
+                <th>Location</th>
+                <th>Key Distinguishing Morphological Features</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cervical</strong></td>
+                <td><strong>7</strong> (C1–C7)</td>
+                <td>Neck</td>
+                <td>Transverse foramina for vertebral arteries; bifid spinous processes (C2–C6); Atlas (C1) lacks body/spine; Axis (C2) bears dens (odontoid process); C7 is vertebra prominens.</td>
+              </tr>
+              <tr>
+                <td><strong>Thoracic</strong></td>
+                <td><strong>12</strong> (T1–T12)</td>
+                <td>Chest / Thorax</td>
+                <td>Costal facets and demifacets that articulate with rib heads & tubercles; long, pointed spinous processes that slope downward.</td>
+              </tr>
+              <tr>
+                <td><strong>Lumbar</strong></td>
+                <td><strong>5</strong> (L1–L5)</td>
+                <td>Loin / Small of back</td>
+                <td>Largest, massive drum-shaped bodies adapted to support upper body weight; short, thick, horizontal spinous processes.</td>
+              </tr>
+              <tr>
+                <td><strong>Sacral</strong></td>
+                <td><strong>5</strong> fused (1 sacrum)</td>
+                <td>Pelvis base</td>
+                <td>Fused triangular bone forming posterior pelvic wall; sacral canal, sacral promontory, and anterior/posterior sacral foramina.</td>
+              </tr>
+              <tr>
+                <td><strong>Coccygeal</strong></td>
+                <td><strong>4</strong> fused (1 coccyx)</td>
+                <td>Tailbone tip</td>
+                <td>Rudimentary fused tailbone; attached to sacral hiatus; acts as sitting shock absorber and pelvic floor muscle attachment.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Interactive 9: Vertebra Identification & Sequencing Activity -->
+      <div class="grid-2">
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 8.1: Vertebral Feature Mystery Quiz</h3>
+          <p class="card-desc">Identify the correct vertebral region for each clinical case:</p>
+
+          <div style="background: var(--surface-container-low); padding: var(--space-md); border-radius: var(--rounded); margin-bottom: var(--space-sm);">
+            <p style="font-weight: 700; font-size: var(--body-size); margin-bottom: var(--space-xs);">
+              Case A: A forensic anthropologist discovers a vertebra with transverse foramina in its transverse processes and a toothlike projection (dens) extending upward from its body. Which specific vertebra is this?
+            </p>
+            <div class="option-list" style="margin-bottom: 0;">
+              <button class="option-btn" onclick="checkVertCase(1, false, this)">Atlas (C1 vertebra)</button>
+              <button class="option-btn" onclick="checkVertCase(1, true, this)">Axis (C2 vertebra)</button>
+              <button class="option-btn" onclick="checkVertCase(1, false, this)">Vertebra prominens (C7)</button>
+              <button class="option-btn" onclick="checkVertCase(1, false, this)">First thoracic vertebra (T1)</button>
+            </div>
+            <div id="vert-case-fb-1" class="feedback-box"></div>
+          </div>
+
+          <div style="background: var(--surface-container-low); padding: var(--space-md); border-radius: var(--rounded);">
+            <p style="font-weight: 700; font-size: var(--body-size); margin-bottom: var(--space-xs);">
+              Case B: A vertebra exhibits costal facets on its transverse processes and vertebral body. Which vertebral group does it belong to?
+            </p>
+            <div class="option-list" style="margin-bottom: 0;">
+              <button class="option-btn" onclick="checkVertCase(2, false, this)">Cervical</button>
+              <button class="option-btn" onclick="checkVertCase(2, true, this)">Thoracic</button>
+              <button class="option-btn" onclick="checkVertCase(2, false, this)">Lumbar</button>
+              <button class="option-btn" onclick="checkVertCase(2, false, this)">Sacral</button>
+            </div>
+            <div id="vert-case-fb-2" class="feedback-box"></div>
+          </div>
+        </div>
+
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 8.2: Superior-to-Inferior Column Sequencing</h3>
+          <p class="card-desc">Arrange the 5 vertebral regions in anatomical order from the base of the skull down to the tailbone:</p>
+
+          <div class="order-list" id="vert-order-container">
+            <!-- Dynamically populated or manually ordered items -->
+            <div class="order-item" id="vo-3" onclick="selectOrderItem('vo-3')">
+              <span class="order-num" id="vo-num-3">?</span>
+              <span class="order-text">Lumbar (5 vertebrae in small of back)</span>
+              <div class="order-ctrls">
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderUp('vo-3', event)">▲</button>
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderDown('vo-3', event)">▼</button>
+              </div>
+            </div>
+            <div class="order-item" id="vo-1" onclick="selectOrderItem('vo-1')">
+              <span class="order-num" id="vo-num-1">?</span>
+              <span class="order-text">Cervical (7 vertebrae of neck)</span>
+              <div class="order-ctrls">
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderUp('vo-1', event)">▲</button>
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderDown('vo-1', event)">▼</button>
+              </div>
+            </div>
+            <div class="order-item" id="vo-5" onclick="selectOrderItem('vo-5')">
+              <span class="order-num" id="vo-num-5">?</span>
+              <span class="order-text">Coccygeal / Coccyx (4 fused rudimentary tailbone)</span>
+              <div class="order-ctrls">
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderUp('vo-5', event)">▲</button>
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderDown('vo-5', event)">▼</button>
+              </div>
+            </div>
+            <div class="order-item" id="vo-2" onclick="selectOrderItem('vo-2')">
+              <span class="order-num" id="vo-num-2">?</span>
+              <span class="order-text">Thoracic (12 vertebrae articulating with ribs)</span>
+              <div class="order-ctrls">
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderUp('vo-2', event)">▲</button>
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderDown('vo-2', event)">▼</button>
+              </div>
+            </div>
+            <div class="order-item" id="vo-4" onclick="selectOrderItem('vo-4')">
+              <span class="order-num" id="vo-num-4">?</span>
+              <span class="order-text">Sacral / Sacrum (5 fused vertebrae in pelvis)</span>
+              <div class="order-ctrls">
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderUp('vo-4', event)">▲</button>
+                <button class="btn btn-secondary btn-sm" onclick="moveOrderDown('vo-4', event)">▼</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-sm); align-items: center;">
+            <button class="btn btn-primary" onclick="verifyVertOrder()">Check Anatomical Order</button>
+            <span id="vert-order-msg" style="font-weight: 700; font-size: var(--body-size);"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STANDARDS 9 & 10 ==================== -->
+    <section id="sec-std9-10" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standards 9 & 10: Joints, Movements & Connective Tissues</span>
+            <span class="section-tag">Articulations & Kinesiology</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Classify articulations structurally (fibrous, cartilaginous, synovial) and functionally (synarthrotic, amphiarthrotic, diarthrotic); differentiate ligaments from tendons; simulate joint actions.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ligaments vs Tendons Spotlight Card -->
+      <div class="card card-success" style="margin-bottom: var(--space-md);">
+        <h3 class="card-title">Standard 10 Core Focus: Ligaments vs. Tendons</h3>
+        <p class="card-desc">Crucial distinction tested extensively on state exams:</p>
+        <div class="grid-2" style="margin-bottom: 0;">
+          <div style="background: var(--surface-container-low); padding: var(--space-md); border-radius: var(--rounded); border-left: 4px solid var(--tertiary);">
+            <h4 style="font-family: var(--font-headline); color: var(--tertiary);">Ligament</h4>
+            <p style="font-size: var(--body-size); margin-top: 4px;">
+              <strong>Connects:</strong> <span style="text-decoration: underline;">Bone to Bone</span> across a joint.
+              <br><strong>Function:</strong> Stabilizes articulations, reinforces the fibrous capsule, guides movement, and prevents dislocation or abnormal range of motion.
+              <br><strong>Injury:</strong> A stretch or tear in a ligament is clinically termed a <em>Sprain</em>.
+            </p>
+          </div>
+          <div style="background: var(--surface-container-low); padding: var(--space-md); border-radius: var(--rounded); border-left: 4px solid var(--primary);">
+            <h4 style="font-family: var(--font-headline); color: var(--primary);">Tendon</h4>
+            <p style="font-size: var(--body-size); margin-top: 4px;">
+              <strong>Connects:</strong> <span style="text-decoration: underline;">Muscle to Bone</span> (fascia continuation).
+              <br><strong>Function:</strong> Transmits tensile force generated by contracting muscle fibers (pulling insertion toward origin) to move the skeleton.
+              <br><strong>Injury:</strong> An overstretch or tear in a tendon/muscle is clinically termed a <em>Strain</em>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive 10: Joint Classification Matrix & 6 Synovial Types -->
+      <div class="grid-2">
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 9.1: 6 Synovial Joint Types Matching</h3>
+          <p class="card-desc">Click each synovial joint type, then choose its matching anatomical example:</p>
+
+          <div class="match-grid" id="joint-matcher-box">
+            <div class="match-col">
+              <div class="match-item" id="jt-1" onclick="selectJointType(1)">Ball-and-Socket</div>
+              <div class="match-item" id="jt-2" onclick="selectJointType(2)">Hinge Joint</div>
+              <div class="match-item" id="jt-3" onclick="selectJointType(3)">Pivot Joint</div>
+              <div class="match-item" id="jt-4" onclick="selectJointType(4)">Saddle Joint</div>
+              <div class="match-item" id="jt-5" onclick="selectJointType(5)">Condylar Joint</div>
+              <div class="match-item" id="jt-6" onclick="selectJointType(6)">Plane / Gliding</div>
+            </div>
+            <div class="match-col">
+              <div class="match-item" id="je-3" onclick="selectJointEx(3)">Atlas rotating around dens of Axis (neck rotation)</div>
+              <div class="match-item" id="je-1" onclick="selectJointEx(1)">Hip and Shoulder (multiaxial movement in all planes)</div>
+              <div class="match-item" id="je-4" onclick="selectJointEx(4)">Carpal (Trapezium) and Metacarpal of thumb (twiddling)</div>
+              <div class="match-item" id="je-2" onclick="selectJointEx(2)">Elbow joint & phalangeal interphalangeal joints</div>
+              <div class="match-item" id="je-6" onclick="selectJointEx(6)">Between carpal bones of wrist & sacroiliac joint</div>
+              <div class="match-item" id="je-5" onclick="selectJointEx(5)">Between metacarpals and proximal phalanges (knuckles)</div>
+            </div>
+          </div>
+          <div id="joint-feedback" class="feedback-box"></div>
+        </div>
+
+        <!-- Interactive 11: Joint Movements Clinical Simulator -->
+        <div class="card card-accent">
+          <h3 class="card-title">Activity 9.2: Joint Movement Visualizer</h3>
+          <p class="card-desc">Click any movement term to inspect its kinematic definition and joint action:</p>
+
+          <div class="movement-pill-group">
+            <button class="btn btn-secondary btn-sm" onclick="showMoveInfo('flex')">Flexion / Extension</button>
+            <button class="btn btn-secondary btn-sm" onclick="showMoveInfo('abduct')">Abduction / Adduction</button>
+            <button class="btn btn-secondary btn-sm" onclick="showMoveInfo('ankle')">Dorsiflexion / Plantar Flexion</button>
+            <button class="btn btn-secondary btn-sm" onclick="showMoveInfo('forearm')">Supination / Pronation</button>
+            <button class="btn btn-secondary btn-sm" onclick="showMoveInfo('foot')">Inversion / Eversion</button>
+            <button class="btn btn-secondary btn-sm" onclick="showMoveInfo('shoulder')">Elevation / Depression</button>
+          </div>
+
+          <div class="joint-canvas-card">
+            <h4 id="move-title" style="font-family: var(--font-headline); color: var(--primary);">Flexion & Extension</h4>
+            <p id="move-definition" style="font-size: var(--body-size); margin: 6px 0;">
+              <strong>Flexion:</strong> Bending parts at a joint so that the angle between them decreases (e.g., bending the knee or elbow).<br>
+              <strong>Extension:</strong> Straightening parts at a joint so that the angle between them increases (e.g., kicking forward / standing upright).
+            </p>
+            <div id="move-example" style="font-weight: 700; color: var(--tertiary); font-size: var(--label-size); text-transform: uppercase;">
+              Primary Joint: Hinge Joint (Elbow / Knee)
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-md); background: var(--surface-container-low); padding: var(--space-sm) var(--space-md); border-radius: var(--rounded);">
+            <p style="font-weight: 700; font-size: var(--body-size);">Quick Check: Turning the foot so that the plantar surface faces medially is called:</p>
+            <div style="display: flex; gap: var(--space-xs); margin-top: 4px; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="checkMoveQuick('eversion', this)">Eversion</button>
+              <button class="btn btn-secondary btn-sm" onclick="checkMoveQuick('inversion', this)">Inversion</button>
+              <button class="btn btn-secondary btn-sm" onclick="checkMoveQuick('pronation', this)">Pronation</button>
+            </div>
+            <div id="move-quick-fb" class="feedback-box"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STANDARD 11 ==================== -->
+    <section id="sec-std11" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Standard 11: Diseases and Disorders of the Skeletal System</span>
+            <span class="section-tag">Clinical Pathology Clinic</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            Diagnose real-world clinical presentations across all 8 required conditions: Herniated Disk, Osteoarthritis, Osteoporosis, Scoliosis, Kyphosis, Lordosis, Spina Bifida, and Rheumatoid Arthritis.
+          </p>
+        </div>
+      </div>
+
+      <!-- Clinical Diagnostic Simulator Card -->
+      <div class="card card-accent" style="margin-bottom: var(--space-md);">
+        <h3 class="card-title">Activity 11.1: Orthopedic Grand Rounds Case Clinic</h3>
+        <p class="card-desc">Review the patient symptoms, history, and imaging notes, then make the correct clinical diagnosis:</p>
+
+        <div style="background: var(--surface-container-low); border: 1px solid var(--outline-variant); border-radius: var(--rounded-lg); padding: var(--space-md); margin-bottom: var(--space-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+            <span class="case-badge badge-autoimmune" id="case-badge">Case File 1 of 5</span>
+            <span style="font-size: var(--label-size); font-weight: 700; color: var(--on-surface-variant);" id="case-step-label">Patient Diagnostic Round</span>
+          </div>
+
+          <h4 id="case-title" style="font-family: var(--font-headline); font-size: 1.2rem; color: var(--on-surface); margin-bottom: var(--space-xs);">
+            Patient Presentation: Severe Lower Back Pain with Sciatic Nerve Radiation
+          </h4>
+          <p id="case-desc" style="font-size: var(--body-size); margin-bottom: var(--space-sm); color: var(--on-surface);">
+            A 42-year-old warehouse worker felt a sudden sharp pop while lifting a heavy crate. He presents with severe lower back pain radiating down his posterior leg, accompanied by numbness in the foot. MRI confirms rupture of the annulus fibrosus with protrusion of the nucleus pulposus pressing against the spinal nerve root.
+          </p>
+
+          <p style="font-weight: 700; font-size: var(--body-size); margin-bottom: var(--space-xs);">Select Most Likely Diagnosis:</p>
+          <div class="option-list" id="case-options-box">
+            <!-- Dynamically populated via JS -->
+          </div>
+          <div id="case-feedback" class="feedback-box"></div>
+
+          <div style="margin-top: var(--space-md); display: flex; justify-content: flex-end;">
+            <button class="btn btn-secondary btn-sm" id="btn-next-case" onclick="nextClinicalCase()" style="display: none;">Next Patient Case →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Summary of Spinal Pathologies -->
+      <div class="card">
+        <h3 class="card-title">Activity 11.2: Pathological Curvatures & Developmental Defects Matrix</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Disorder</th>
+                <th>Etiology / Mechanism</th>
+                <th>Clinical Hallmark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Herniated Disk</strong></td>
+                <td>Rupture of fibrocartilaginous annulus fibrosus with protrusion of elastic nucleus pulposus.</td>
+                <td>Nerve root compression causing severe radiating radiculopathy/pain.</td>
+              </tr>
+              <tr>
+                <td><strong>Osteoarthritis (OA)</strong></td>
+                <td>Degenerative "wear-and-tear" softening and breakdown of articular hyaline cartilage.</td>
+                <td>Asymmetric joint pain, morning stiffness lasting &lt;30 min, crepitus, bone spurs.</td>
+              </tr>
+              <tr>
+                <td><strong>Rheumatoid Arthritis (RA)</strong></td>
+                <td>Autoimmune attack on synovial membrane causing inflammatory pannus.</td>
+                <td>Symmetric joint destruction, debilitating deformity, and <em>bony ankylosis</em> (joint fusion).</td>
+              </tr>
+              <tr>
+                <td><strong>Osteoporosis</strong></td>
+                <td>Rate of osteoclast bone resorption outpaces osteoblast bone deposition.</td>
+                <td>Marked loss of bone mineral density, porous trabeculae, high fracture risk.</td>
+              </tr>
+              <tr>
+                <td><strong>Scoliosis</strong></td>
+                <td>Abnormal lateral curvature of the vertebral column with uneven hips or shoulders.</td>
+                <td>Most commonly diagnosed in adolescent females; Adams forward bend test.</td>
+              </tr>
+              <tr>
+                <td><strong>Kyphosis</strong></td>
+                <td>Exaggerated thoracic curvature ("hunchback").</td>
+                <td>Rounded shoulders; seen in strenuous athletics or postmenopausal vertebral compression fractures.</td>
+              </tr>
+              <tr>
+                <td><strong>Lordosis</strong></td>
+                <td>Accentuated lumbar curvature ("swayback").</td>
+                <td>Marked inward curvature of small of back; seen in pregnancy and heavy abdominal loads.</td>
+              </tr>
+              <tr>
+                <td><strong>Spina Bifida</strong></td>
+                <td>Congenital failure of vertebral laminae to unite/fuse during embryonic development.</td>
+                <td>Protrusion of spinal contents; strongly correlated with maternal folic acid deficiency.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: MASTERY EXAM ==================== -->
+    <section id="sec-mastery" class="std-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span>Utah MAP Strand 5 Comprehensive Mastery Exam</span>
+            <span class="section-tag">Final Benchmark</span>
+          </h2>
+          <p style="color: var(--on-surface-variant); font-size: var(--body-size);">
+            10 randomized high-yield questions covering all standards (bone histology, remodeling, markings, skeleton divisions, joints, and clinical pathology).
+          </p>
+        </div>
+      </div>
+
+      <div class="card card-accent" id="mastery-quiz-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); border-bottom: 1px solid var(--outline-variant); padding-bottom: var(--space-sm);">
+          <span style="font-weight: 800; font-family: var(--font-headline); font-size: 1.15rem; color: var(--primary);" id="mq-counter">Question 1 of 10</span>
+          <span style="font-weight: 700; font-size: var(--label-size); background: var(--surface-container); padding: 4px 10px; border-radius: var(--rounded-full);" id="mq-standard-tag">Target: Standard 1</span>
+        </div>
+
+        <h3 id="mq-question" style="font-family: var(--font-headline); font-size: 1.25rem; margin-bottom: var(--space-md); line-height: 1.4;">
+          Loading exam question...
+        </h3>
+
+        <div class="option-list" id="mq-options-list">
+          <!-- Populated via JS -->
+        </div>
+
+        <div id="mq-feedback" class="feedback-box"></div>
+
+        <div style="margin-top: var(--space-lg); display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: var(--body-size); color: var(--on-surface-variant);" id="mq-score-tracker">Score: 0 / 10</span>
+          <button class="btn btn-primary" id="mq-next-btn" onclick="nextMasteryQuestion()" style="display: none;">Next Question →</button>
+        </div>
+      </div>
+
+      <div class="card" id="mastery-summary-card" style="display: none; text-align: center; padding: var(--space-xl);">
+        <h3 style="font-family: var(--font-headline); font-size: var(--display-size); color: var(--tertiary); margin-bottom: var(--space-sm);">Mastery Exam Complete!</h3>
+        <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md);" id="mq-final-score-text">You scored 10 / 10 (100%)</p>
+        <p style="max-width: 60ch; margin: 0 auto var(--space-lg); color: var(--on-surface-variant);" id="mq-final-msg">
+          Outstanding work! You have demonstrated exceptional competence across all 11 standards of the Utah MAP Strand 5 Skeletal System curriculum.
+        </p>
+        <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="restartMasteryExam()">Retake Exam</button>
+          <button class="btn btn-secondary" onclick="showCertificateModal()">View Completion Certificate</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificate Overlay Modal -->
+    <div class="cert-overlay" id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-title">
+      <div class="cert-box">
+        <h2 id="cert-title" style="font-family: var(--font-headline); font-size: 1.8rem; color: var(--primary); margin-bottom: var(--space-xs);">Certificate of Mastery</h2>
+        <p style="font-size: var(--label-size); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--tertiary); margin-bottom: var(--space-md);">Utah Medical Anatomy & Physiology — Strand 5</p>
+
+        <p style="font-size: var(--body-size); margin-bottom: var(--space-md);">This certifies that the student has successfully demonstrated high proficiency in:</p>
+        <ul style="text-align: left; max-width: 420px; margin: 0 auto var(--space-md); font-size: var(--body-size); line-height: 1.6; color: var(--on-surface);">
+          <li>Skeletal Support, Hematopoiesis & Mineral Homeostasis</li>
+          <li>Macroscopic Long Bone & Microscopic Osteon Histology</li>
+          <li>Bone Shapes, Markings, Sutures & Fontanels</li>
+          <li>Axial & Appendicular Skeletal Divisions & Vertebrae</li>
+          <li>Joint Structural/Functional Articulations & Kinesiology</li>
+          <li>Orthopedic Clinical Pathology & Skeletal Diseases</li>
+        </ul>
+
+        <div style="border-top: 1px dashed var(--outline-variant); padding-top: var(--space-md); display: flex; justify-content: space-between; align-items: flex-end;">
+          <div style="text-align: left;">
+            <span style="font-size: var(--label-size); font-weight: 700; color: var(--on-surface-variant);">ISSUED ON:</span>
+            <div style="font-weight: 800; color: var(--on-surface);">Academic Year 2026–2027</div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="hideCertificateModal()">Close Certificate</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    /* ==========================================================================
+       MAP UNIT 5 SKELETAL SYSTEM INTERACTIVE ENGINE
+       Standards 1-11 Comprehensive Data Structures & Interactions
+       ========================================================================== */
+
+    // Global State Container
+    var appState = {
+      points: 0,
+      completedStandards: {},
+      cellMatchedCount: 0,
+      caSimRun: false,
+      fibSec1Completed: false,
+      boneShapeSortedCount: 0,
+      skelSortedCount: 0,
+      jointMatchedCount: 0,
+      vertOrderCompleted: false,
+      caseStep: 0,
+      caseScore: 0,
+      mqIndex: 0,
+      mqScore: 0
+    };
+
+    // --- State Persistence Helpers ---
+    async function saveState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (e) {
+          console.warn('Failed to save state:', e);
+        }
+      }
+    }
+
+    async function loadSavedState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          var saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === 'object') {
+            appState = Object.assign(appState, saved);
+            updateGlobalStats();
+          }
+        } catch (e) {
+          console.warn('Failed to load state:', e);
+        }
+      }
+    }
+
+    function addPoints(pts, standardKey) {
+      appState.points += pts;
+      if (standardKey) {
+        appState.completedStandards[standardKey] = true;
+      }
+      updateGlobalStats();
+      saveState();
+    }
+
+    function updateGlobalStats() {
+      var stdCount = Object.keys(appState.completedStandards).length;
+      var elCount = document.getElementById('stat-standards-count');
+      if (elCount) elCount.textContent = stdCount + ' / 11';
+
+      var elPts = document.getElementById('stat-points-val');
+      if (elPts) elPts.textContent = appState.points + ' pts';
+
+      var percent = Math.min(100, Math.round((stdCount / 11) * 100));
+      var elFill = document.getElementById('global-progress-fill');
+      if (elFill) elFill.style.width = percent + '%';
+
+      var elPct = document.getElementById('stat-percent-text');
+      if (elPct) elPct.textContent = percent + '%';
+
+      var elLevel = document.getElementById('stat-level-text');
+      if (elLevel) {
+        if (stdCount >= 11) {
+          elLevel.textContent = 'Mastery Achieved ★';
+          elLevel.style.color = 'var(--tertiary)';
+        } else if (stdCount >= 7) {
+          elLevel.textContent = 'Advanced Scholar';
+          elLevel.style.color = 'var(--primary)';
+        } else if (stdCount >= 4) {
+          elLevel.textContent = 'Proficient Student';
+          elLevel.style.color = 'var(--warning)';
+        } else {
+          elLevel.textContent = 'Novice Student';
+          elLevel.style.color = 'var(--on-surface-variant)';
+        }
+      }
+    }
+
+    function resetAllProgress() {
+      if (confirm('Reset your study guide progress, activity matches, and exam scores?')) {
+        appState = {
+          points: 0,
+          completedStandards: {},
+          cellMatchedCount: 0,
+          caSimRun: false,
+          fibSec1Completed: false,
+          boneShapeSortedCount: 0,
+          skelSortedCount: 0,
+          jointMatchedCount: 0,
+          vertOrderCompleted: false,
+          caseStep: 0,
+          caseScore: 0,
+          mqIndex: 0,
+          mqScore: 0
+        };
+        updateGlobalStats();
+        saveState();
+        location.reload();
+      }
+    }
+
+    // --- Section Tab Switcher ---
+    function switchSection(secKey) {
+      var sections = document.querySelectorAll('.std-section');
+      sections.forEach(function(sec) {
+        sec.classList.remove('active');
+      });
+
+      var target = document.getElementById('sec-' + secKey);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      var navBtns = document.querySelectorAll('.nav-btn');
+      navBtns.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+
+      var activeBtn = Array.from(navBtns).find(function(b) {
+        return b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + secKey + "'");
+      });
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (secKey === 'mastery' && appState.mqIndex === 0) {
+        renderMasteryQuestion();
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 1 & 2 INTERACTIVE LOGIC
+       ========================================================================== */
+    var selectedCellTerm = null;
+    var matchedCells = {};
+
+    function selectCellTerm(termId) {
+      if (matchedCells[termId]) return;
+      selectedCellTerm = termId;
+      for (var i = 1; i <= 3; i++) {
+        var el = document.getElementById('c-cell-' + i);
+        if (el && !matchedCells[i]) el.classList.remove('active-term');
+      }
+      var target = document.getElementById('c-cell-' + termId);
+      if (target) target.classList.add('active-term');
+    }
+
+    function selectCellDef(defId) {
+      if (!selectedCellTerm) {
+        alert('Please select a bone cell on the left first!');
+        return;
+      }
+      var fb = document.getElementById('cell-feedback');
+      if (selectedCellTerm === defId) {
+        matchedCells[defId] = true;
+        var termEl = document.getElementById('c-cell-' + defId);
+        var defEl = document.getElementById('c-def-' + defId);
+        if (termEl) {
+          termEl.classList.remove('active-term');
+          termEl.classList.add('matched');
+        }
+        if (defEl) defEl.classList.add('matched');
+
+        selectedCellTerm = null;
+        appState.cellMatchedCount++;
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Correct match! ' + (termEl ? termEl.textContent : '') + ' role verified.';
+        }
+
+        if (Object.keys(matchedCells).length === 3) {
+          addPoints(15, 'std2');
+          if (fb) {
+            fb.textContent = 'All 3 Bone Cell roles matched! Standard 2 Mastery unlocked (+15 pts).';
+          }
+        }
+      } else {
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect pair. Review the function of that cell and try again.';
+        }
+      }
+    }
+
+    // Calcium Homeostasis Simulator
+    function updateCaSimulator() {
+      var slider = document.getElementById('ca-slider');
+      if (!slider) return;
+      var val = parseFloat(slider.value);
+      var badge = document.getElementById('ca-val-badge');
+      if (badge) badge.textContent = val.toFixed(1) + ' mg/dL';
+
+      var status = document.getElementById('ca-sim-status');
+      if (!status) return;
+
+      if (val < 8.5) {
+        status.style.borderLeft = '4px solid var(--warning)';
+        status.innerHTML = '<strong style="color: var(--warning);">Hypocalcemia Triggered:</strong> Blood calcium is low (' + val.toFixed(1) + ' mg/dL).<br>' +
+          '• <strong>Sensor:</strong> Parathyroid glands detect decrease.<br>' +
+          '• <strong>Effector 1:</strong> Parathyroid hormone (PTH) stimulates <strong>osteoclasts</strong> to dissolve bone matrix and release Ca²⁺ into blood.<br>' +
+          '• <strong>Effector 2:</strong> Kidneys increase Ca²⁺ reabsorption and activate Vitamin D (calcitriol) to boost intestinal calcium absorption.';
+        if (!appState.caSimRun) {
+          appState.caSimRun = true;
+          addPoints(10, 'std1');
+        }
+      } else if (val > 10.5) {
+        status.style.borderLeft = '4px solid #00838f';
+        status.innerHTML = '<strong style="color: #00838f;">Hypercalcemia Triggered:</strong> Blood calcium is elevated (' + val.toFixed(1) + ' mg/dL).<br>' +
+          '• <strong>Sensor:</strong> Thyroid gland detects high circulating Ca²⁺.<br>' +
+          '• <strong>Effector:</strong> <strong>Calcitonin</strong> is secreted, directly inhibiting osteoclasts so osteoblasts deposit excess calcium into bone matrix.';
+      } else {
+        status.style.borderLeft = '4px solid var(--tertiary)';
+        status.innerHTML = '<strong style="color: var(--tertiary);">Normal Physiological Equilibrium (8.5–10.5 mg/dL):</strong> Dynamic calcium homeostasis maintained across bones, kidneys, and GI tract.';
+      }
+    }
+
+    function setCaValue(val) {
+      var slider = document.getElementById('ca-slider');
+      if (slider) {
+        slider.value = val;
+        updateCaSimulator();
+      }
+    }
+
+    // Fill in the Blank Standard 1 Check
+    function checkFIBSection1() {
+      var v1 = (document.getElementById('fib-1').value || '').trim().toLowerCase();
+      var v2 = (document.getElementById('fib-2').value || '').trim().toLowerCase();
+      var v3 = (document.getElementById('fib-3').value || '').trim().toLowerCase();
+      var v4 = (document.getElementById('fib-4').value || '').trim().toLowerCase();
+      var v5 = (document.getElementById('fib-5').value || '').trim().toLowerCase();
+      var v6 = (document.getElementById('fib-6').value || '').trim().toLowerCase();
+
+      var correctCount = 0;
+
+      // 1: hematopoiesis / hemopoiesis
+      if (v1 === 'hematopoiesis' || v1 === 'hemopoiesis') {
+        document.getElementById('fib-1').className = 'fib-input correct';
+        correctCount++;
+      } else {
+        document.getElementById('fib-1').className = 'fib-input incorrect';
+      }
+
+      // 2: red
+      if (v2 === 'red' || v2 === 'red bone' || v2 === 'red marrow') {
+        document.getElementById('fib-2').className = 'fib-input correct';
+        correctCount++;
+      } else {
+        document.getElementById('fib-2').className = 'fib-input incorrect';
+      }
+
+      // 3: fat / lipid / adipose
+      if (v3 === 'fat' || v3 === 'adipose' || v3 === 'lipids' || v3 === 'fatty tissue') {
+        document.getElementById('fib-3').className = 'fib-input correct';
+        correctCount++;
+      } else {
+        document.getElementById('fib-3').className = 'fib-input incorrect';
+      }
+
+      // 4: parathyroid hormone / pth
+      if (v4 === 'parathyroid hormone' || v4 === 'pth') {
+        document.getElementById('fib-4').className = 'fib-input correct';
+        correctCount++;
+      } else {
+        document.getElementById('fib-4').className = 'fib-input incorrect';
+      }
+
+      // 5: osteoclasts
+      if (v5 === 'osteoclasts' || v5 === 'osteoclast') {
+        document.getElementById('fib-5').className = 'fib-input correct';
+        correctCount++;
+      } else {
+        document.getElementById('fib-5').className = 'fib-input incorrect';
+      }
+
+      // 6: thicken / strengthen
+      if (v6.includes('thicken') || v6.includes('strength') || v6.includes('grow')) {
+        document.getElementById('fib-6').className = 'fib-input correct';
+        correctCount++;
+      } else {
+        document.getElementById('fib-6').className = 'fib-input incorrect';
+      }
+
+      var msg = document.getElementById('fib-sec1-msg');
+      if (correctCount === 6) {
+        msg.style.color = 'var(--tertiary)';
+        msg.textContent = 'Excellent! 6/6 correct. Standard 1 master verified (+15 pts).';
+        addPoints(15, 'std1');
+      } else {
+        msg.style.color = 'var(--error)';
+        msg.textContent = correctCount + ' / 6 correct. Review red/incorrect blanks and retry.';
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 3 & 4 INTERACTIVE LOGIC
+       ========================================================================== */
+    var sortedBones = {};
+    function sortBoneShape(boneId, targetCategory) {
+      if (sortedBones[boneId]) return;
+      var chip = document.getElementById('b-' + boneId);
+      var bucket = document.getElementById('items-' + targetCategory);
+      if (chip && bucket) {
+        chip.style.display = 'none';
+        var item = document.createElement('div');
+        item.className = 'sorter-chip';
+        item.style.cursor = 'default';
+        item.innerHTML = '<strong>' + chip.textContent + '</strong> <span style="color:var(--tertiary);">✓</span>';
+        bucket.appendChild(item);
+        sortedBones[boneId] = true;
+        appState.boneShapeSortedCount++;
+
+        var fb = document.getElementById('shape-feedback');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Placed ' + chip.textContent + ' into ' + targetCategory.toUpperCase() + ' bones.';
+        }
+
+        if (Object.keys(sortedBones).length === 10) {
+          addPoints(15, 'std3');
+          if (fb) fb.textContent = 'All 10 bones correctly categorized by shape! Standard 3 Mastered (+15 pts).';
+        }
+      }
+    }
+
+    // Long bone diagram hotspot explorer
+    var hotspotData = {
+      articular: {
+        title: 'Articular Cartilage (Hyaline)',
+        desc: 'A thin layer of hyaline cartilage covering the articulating surface of the epiphysis. It provides a smooth, lubricated surface that minimizes friction and cushions compressive mechanical forces at synovial joints. Note: Lacks periosteum and blood vessels, healing slowly if damaged.'
+      },
+      epiphysis: {
+        title: 'Epiphysis (Proximal & Distal Ends)',
+        desc: 'The expanded portion at each end of a long bone that articulates with adjacent bones. Composed predominantly of spongy (cancellous) bone lined with thin compact bone. Trabeculae form branching plates that dissipate multi-directional stresses; contains active red bone marrow for hematopoiesis.'
+      },
+      plate: {
+        title: 'Epiphyseal Plate (Growth Plate)',
+        desc: 'A cartilaginous band between the diaphysis and epiphysis where chondrocytes undergo active mitosis, allowing long bones to lengthen during childhood and adolescence. Stimulated by growth hormone and sex hormones. Once ossification completes, it leaves an immovable epiphyseal line.'
+      },
+      compact: {
+        title: 'Compact (Cortical) Bone Wall',
+        desc: 'Tightly packed continuous extracellular matrix with no visible gaps forming the rigid wall of the diaphysis. Composed of microscopic cylindrical units called osteons (Haversian systems) containing concentric lamellae, osteocytes in lacunae, and central canals with blood vessels.'
+      },
+      medullary: {
+        title: 'Medullary Cavity & Endosteum',
+        desc: 'A hollow longitudinal chamber inside the diaphysis continuous with spongy bone spaces. Lined by a delicate layer of bone-forming cells called the endosteum. In adults, it is filled with fatty yellow marrow which serves as energy storage.'
+      },
+      periosteum: {
+        title: 'Periosteum (Dense Connective Sheath)',
+        desc: 'A tough, fibrous membrane of dense irregular connective tissue completely covering the outer bone surface (except over articular cartilage). Firmly attached via perforating fibers continuous with tendons and ligaments. Crucial for bone growth in diameter and fracture repair.'
+      }
+    };
+
+    function showHotspotInfo(partKey) {
+      var data = hotspotData[partKey];
+      if (!data) return;
+      var title = document.getElementById('hs-title');
+      var desc = document.getElementById('hs-desc');
+      if (title) title.textContent = data.title;
+      if (desc) desc.textContent = data.desc;
+
+      // Update spot visual state
+      document.querySelectorAll('.hotspot').forEach(function(el) {
+        el.classList.remove('active-spot');
+      });
+      var activeEl = document.getElementById('hs-' + partKey);
+      if (activeEl) activeEl.classList.add('active-spot');
+
+      addPoints(5, 'std4');
+    }
+
+    // Microscopic Histology Quiz
+    function checkHistoQ(qNum, choice, btn) {
+      var parent = document.getElementById('q-histo-' + qNum);
+      if (!parent) return;
+      var btns = parent.querySelectorAll('.option-btn');
+      btns.forEach(function(b) {
+        b.disabled = true;
+      });
+
+      var fb = document.getElementById('histo-fb-' + qNum);
+      if (qNum === 1) {
+        if (choice === 'B') {
+          btn.classList.add('correct');
+          if (fb) {
+            fb.className = 'feedback-box show feedback-correct';
+            fb.textContent = 'Correct! Osteons (Haversian systems) form the microscopic cylindrical units of compact bone.';
+          }
+          addPoints(5);
+        } else {
+          btn.classList.add('incorrect');
+          if (fb) {
+            fb.className = 'feedback-box show feedback-wrong';
+            fb.textContent = 'Incorrect. Trabeculae form spongy bone; osteons form compact bone.';
+          }
+        }
+      } else if (qNum === 2) {
+        if (choice === 'A') {
+          btn.classList.add('correct');
+          if (fb) {
+            fb.className = 'feedback-box show feedback-correct';
+            fb.textContent = 'Correct! Canaliculi are microscopic tunnels through which osteocyte cellular processes pass to exchange nutrients and waste.';
+          }
+          addPoints(5);
+        } else {
+          btn.classList.add('incorrect');
+          if (fb) {
+            fb.className = 'feedback-box show feedback-wrong';
+            fb.textContent = 'Incorrect. Lacunae house osteocyte cell bodies; canaliculi are the tiny communicating tubes connecting them.';
+          }
+        }
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 5 & 6 INTERACTIVE LOGIC
+       ========================================================================== */
+    var markingsData = {
+      foramen: {
+        name: 'Foramen (foh-RAY-men)',
+        def: 'An opening through a bone that serves as a passageway for blood vessels, nerves, or ligaments.',
+        ex: 'Foramen magnum of occipital bone (spinal cord exit); mental foramen of mandible (vessels/nerves to chin).'
+      },
+      meatus: {
+        name: 'Meatus (me-AY-tus)',
+        def: 'A tubelike passageway or canal within a bone.',
+        ex: 'External acoustic meatus of the temporal bone leading to the ear drum.'
+      },
+      sinus: {
+        name: 'Sinus (SIE-nus)',
+        def: 'An air-filled cavity or space within a bone lined by mucous membranes.',
+        ex: 'Frontal sinus, sphenoidal sinus, ethmoidal sinus, and maxillary sinuses (paranasal sinuses).'
+      },
+      fossa: {
+        name: 'Fossa (FOSS-ah)',
+        def: 'A relatively deep pit, furrow, or depression on a bone.',
+        ex: 'Mandibular fossa of the temporal bone (articulates with mandibular condyle); olecranon fossa of humerus.'
+      },
+      condyle: {
+        name: 'Condyle (KON-dile)',
+        def: 'A rounded process of bone that articulates with another bone.',
+        ex: 'Occipital condyles of skull (articulate with atlas); lateral and medial condyles of femur and tibia.'
+      },
+      tuberosity: {
+        name: 'Tuberosity (TOO-ber-OS-ih-tee)',
+        def: 'A knoblike process on a bone, usually larger than a tubercle, providing muscle or ligament attachment.',
+        ex: 'Radial tuberosity of radius (biceps attachment); tibial tuberosity (patellar ligament attachment); ischial tuberosity.'
+      },
+      trochanter: {
+        name: 'Trochanter (troh-KAN-ter)',
+        def: 'A relatively large, prominent process found exclusively on the proximal femur.',
+        ex: 'Greater and lesser trochanters of the femur for massive hip and buttock muscle attachments.'
+      },
+      tubercle: {
+        name: 'Tubercle (TOO-ber-kull)',
+        def: 'A small, knoblike process or projection on a bone.',
+        ex: 'Greater and lesser tubercles of the humerus (rotator cuff attachments); rib tubercles.'
+      },
+      process: {
+        name: 'Process (PROS-es)',
+        def: 'A prominent bony projection extending outward from a bone.',
+        ex: 'Mastoid and styloid processes of temporal bone; spinous and transverse processes of vertebrae.'
+      }
+    };
+
+    function inspectMarking() {
+      var select = document.getElementById('marking-select');
+      if (!select) return;
+      var item = markingsData[select.value];
+      if (!item) return;
+
+      document.getElementById('marking-name').textContent = item.name;
+      document.getElementById('marking-def').innerHTML = '<strong>Definition:</strong> ' + item.def;
+      document.getElementById('marking-ex').innerHTML = '<strong>Textbook Example:</strong> ' + item.ex;
+      addPoints(2, 'std5');
+    }
+
+    function checkMarkingQuiz(choice, btn) {
+      var fb = document.getElementById('marking-quiz-fb');
+      if (choice === 'trochanter') {
+        btn.classList.add('correct');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Correct! Trochanters are exclusive to the femur (greater and lesser trochanters).';
+        }
+        addPoints(10, 'std5');
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect. That is not the femur-exclusive large process. Think greater and lesser trochanter!';
+        }
+      }
+    }
+
+    function checkFontanelQ(isCorrect, btn) {
+      var fb = document.getElementById('fontanel-fb');
+      if (isCorrect) {
+        btn.classList.add('correct');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Spot on! Fontanels allow safe cranial molding through the birth canal and rapid brain expansion during infancy.';
+        }
+        addPoints(10, 'std6');
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect. Fetal fontanels are fibrous soft spots facilitating birth passage and brain growth.';
+        }
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 7 INTERACTIVE LOGIC (AXIAL VS APPENDICULAR)
+       ========================================================================== */
+    var skelSortedBones = {};
+    function sortSkelBone(boneId, targetDivision) {
+      if (skelSortedBones[boneId]) return;
+      var chip = document.getElementById('sk-' + boneId);
+      var bucket = document.getElementById('items-' + targetDivision);
+      if (chip && bucket) {
+        chip.style.display = 'none';
+        var item = document.createElement('div');
+        item.className = 'sorter-chip';
+        item.style.cursor = 'default';
+        item.innerHTML = '<strong>' + chip.textContent + '</strong> <span style="color:var(--tertiary);">✓</span>';
+        bucket.appendChild(item);
+        skelSortedBones[boneId] = true;
+        appState.skelSortedCount++;
+
+        // Update counts
+        var axialItems = document.getElementById('items-axial').children.length;
+        var appItems = document.getElementById('items-appendicular').children.length;
+        var bAxial = document.getElementById('axial-count-badge');
+        var bApp = document.getElementById('app-count-badge');
+        if (bAxial) bAxial.textContent = axialItems + ' / 6 items';
+        if (bApp) bApp.textContent = appItems + ' / 6 items';
+
+        var fb = document.getElementById('skel-sort-feedback');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Placed ' + chip.textContent + ' in the ' + targetDivision.toUpperCase() + ' skeleton.';
+        }
+
+        if (Object.keys(skelSortedBones).length === 12) {
+          addPoints(20, 'std7');
+          if (fb) fb.textContent = 'Mastery achieved! All 12 key skeletal bones sorted into Axial & Appendicular divisions (+20 pts).';
+        }
+      }
+    }
+
+    function checkBoneIdentify(qNum, choice, btn) {
+      var fb = document.getElementById('bone-id-fb-' + qNum);
+      var correctChoices = { 1: 'B', 2: 'C', 3: 'B', 4: 'A' };
+      var explanations = {
+        1: 'Correct! The sphenoid bone is the bat-shaped bone holding the sella turcica (pituitary cradle).',
+        2: 'Correct! The mandible is the only freely movable bone in the adult skull.',
+        3: 'Correct! The hip (coxal) bone fuses from the ilium, ischium, and pubis during late teens to early 20s.',
+        4: 'Correct! The fibula is lateral, stabilizes the ankle (lateral malleolus), but bears no direct body weight.'
+      };
+
+      if (choice === correctChoices[qNum]) {
+        btn.classList.add('correct');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = explanations[qNum];
+        }
+        addPoints(5, 'std7');
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect. Re-read the bone anatomical features and try again.';
+        }
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 8 INTERACTIVE LOGIC (VERTEBRAE)
+       ========================================================================== */
+    function checkVertCase(caseNum, isCorrect, btn) {
+      var fb = document.getElementById('vert-case-fb-' + caseNum);
+      if (isCorrect) {
+        btn.classList.add('correct');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = caseNum === 1
+            ? 'Correct! Axis (C2) bears the odontoid process (dens), around which the atlas (C1) pivots side-to-side.'
+            : 'Correct! Thoracic vertebrae (T1–T12) uniquely articulate with ribs via costal facets.';
+        }
+        addPoints(10, 'std8');
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect. Check the defining anatomic features of each vertebral group.';
+        }
+      }
+    }
+
+    function moveOrderUp(itemId, evt) {
+      if (evt) evt.stopPropagation();
+      var item = document.getElementById(itemId);
+      if (!item) return;
+      var prev = item.previousElementSibling;
+      if (prev) {
+        item.parentNode.insertBefore(item, prev);
+        updateOrderNumbers();
+      }
+    }
+
+    function moveOrderDown(itemId, evt) {
+      if (evt) evt.stopPropagation();
+      var item = document.getElementById(itemId);
+      if (!item) return;
+      var next = item.nextElementSibling;
+      if (next) {
+        item.parentNode.insertBefore(next, item);
+        updateOrderNumbers();
+      }
+    }
+
+    function selectOrderItem(itemId) {
+      document.querySelectorAll('.order-item').forEach(function(el) {
+        el.classList.remove('selected-order');
+      });
+      var cur = document.getElementById(itemId);
+      if (cur) cur.classList.add('selected-order');
+    }
+
+    function updateOrderNumbers() {
+      var container = document.getElementById('vert-order-container');
+      if (!container) return;
+      var items = container.children;
+      for (var i = 0; i < items.length; i++) {
+        var numSpan = items[i].querySelector('.order-num');
+        if (numSpan) numSpan.textContent = (i + 1);
+      }
+    }
+
+    function verifyVertOrder() {
+      var container = document.getElementById('vert-order-container');
+      if (!container) return;
+      var items = Array.from(container.children);
+      var ids = items.map(function(el) { return el.id; });
+      var correctSeq = ['vo-1', 'vo-2', 'vo-3', 'vo-4', 'vo-5'];
+      var isPerfect = true;
+      for (var i = 0; i < correctSeq.length; i++) {
+        if (ids[i] !== correctSeq[i]) {
+          isPerfect = false;
+          break;
+        }
+      }
+
+      var msg = document.getElementById('vert-order-msg');
+      if (isPerfect) {
+        msg.style.color = 'var(--tertiary)';
+        msg.textContent = 'Correct sequence! Cervical (7) → Thoracic (12) → Lumbar (5) → Sacral (5 fused) → Coccygeal (4 fused). (+15 pts)';
+        addPoints(15, 'std8');
+      } else {
+        msg.style.color = 'var(--error)';
+        msg.textContent = 'Not quite in order. Move the items using ▲ and ▼ buttons so they run superior to inferior.';
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 9 & 10 INTERACTIVE LOGIC (JOINTS & MOVEMENTS)
+       ========================================================================== */
+    var selectedJointType = null;
+    var matchedJoints = {};
+
+    function selectJointType(typeId) {
+      if (matchedJoints[typeId]) return;
+      selectedJointType = typeId;
+      for (var i = 1; i <= 6; i++) {
+        var el = document.getElementById('jt-' + i);
+        if (el && !matchedJoints[i]) el.classList.remove('active-term');
+      }
+      var target = document.getElementById('jt-' + typeId);
+      if (target) target.classList.add('active-term');
+    }
+
+    function selectJointEx(exId) {
+      if (!selectedJointType) {
+        alert('Please select a synovial joint type on the left first!');
+        return;
+      }
+      var fb = document.getElementById('joint-feedback');
+      if (selectedJointType === exId) {
+        matchedJoints[exId] = true;
+        var termEl = document.getElementById('jt-' + exId);
+        var exEl = document.getElementById('je-' + exId);
+        if (termEl) {
+          termEl.classList.remove('active-term');
+          termEl.classList.add('matched');
+        }
+        if (exEl) exEl.classList.add('matched');
+
+        selectedJointType = null;
+        appState.jointMatchedCount++;
+
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Correct pair! ' + (termEl ? termEl.textContent : '') + ' verified.';
+        }
+
+        if (Object.keys(matchedJoints).length === 6) {
+          addPoints(20, 'std9');
+          addPoints(10, 'std10');
+          if (fb) fb.textContent = 'All 6 Synovial Joint types matched with examples! Standards 9 & 10 Mastered (+30 pts).';
+        }
+      } else {
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect pair. Review the degrees of freedom and planes of movement.';
+        }
+      }
+    }
+
+    var movementData = {
+      flex: {
+        title: 'Flexion & Extension',
+        def: '<strong>Flexion:</strong> Bending parts at a joint so that the angle between them decreases.<br><strong>Extension:</strong> Straightening parts at a joint so that the angle between them increases.<br><strong>Hyperextension:</strong> Extension of parts beyond normal anatomical position.',
+        ex: 'Hinge Joints (Bending and straightening knee or elbow); Ball-and-Socket.'
+      },
+      abduct: {
+        title: 'Abduction & Adduction',
+        def: '<strong>Abduction:</strong> Moving a part away from the midline of the body or axial line of a limb (spreading fingers).<br><strong>Adduction:</strong> Moving a part toward the midline of the body or returning fingers together.',
+        ex: 'Shoulder joint lifting arm laterally; hip joint spreading thighs.'
+      },
+      ankle: {
+        title: 'Dorsiflexion & Plantar Flexion',
+        def: '<strong>Dorsiflexion:</strong> Movement at the ankle that brings the dorsal foot closer to the shin (rocking back on heels).<br><strong>Plantar Flexion:</strong> Movement at ankle that moves the foot farther from the shin (standing on tiptoes).',
+        ex: 'Ankle joint (talocrural articulation).'
+      },
+      forearm: {
+        title: 'Supination & Pronation',
+        def: '<strong>Supination:</strong> Rotation of forearm so palm faces anteriorly/upward in anatomical position ("holding soup").<br><strong>Pronation:</strong> Rotation of forearm so palm faces posteriorly/downward (radius crosses over ulna).',
+        ex: 'Radioulnar joints (pivot articulations).'
+      },
+      foot: {
+        title: 'Inversion & Eversion',
+        def: '<strong>Inversion:</strong> Turning the foot so that the plantar surface faces medially (inward).<br><strong>Eversion:</strong> Turning the foot so that the plantar surface faces laterally (outward).',
+        ex: 'Intertarsal joints of the foot (excessive inversion causes lateral ankle sprains).'
+      },
+      shoulder: {
+        title: 'Elevation & Depression',
+        def: '<strong>Elevation:</strong> Raising a body part superiorly (shrugging shoulders upward).<br><strong>Depression:</strong> Lowering a body part inferiorly (drooping shoulders back down).',
+        ex: 'Scapulae and mandible (opening/closing mouth).'
+      }
+    };
+
+    function showMoveInfo(key) {
+      var data = movementData[key];
+      if (!data) return;
+      document.getElementById('move-title').innerHTML = data.title;
+      document.getElementById('move-definition').innerHTML = data.def;
+      document.getElementById('move-example').innerHTML = 'Primary Joints: ' + data.ex;
+      addPoints(2);
+    }
+
+    function checkMoveQuick(choice, btn) {
+      var fb = document.getElementById('move-quick-fb');
+      if (choice === 'inversion') {
+        btn.classList.add('correct');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Correct! Inversion turns the sole medially; eversion turns the sole laterally.';
+        }
+        addPoints(5);
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect. Turning the sole medially is Inversion.';
+        }
+      }
+    }
+
+    /* ==========================================================================
+       STANDARD 11 CLINICAL PATHOLOGY CASE CLINIC
+       ========================================================================== */
+    var clinicalCases = [
+      {
+        badge: 'Degenerative Disc',
+        badgeClass: 'badge-deg',
+        title: 'Case 1: Severe Radiating Lumbar Back Pain',
+        desc: 'A 42-year-old male presents with sharp lower back pain radiating down the left sciatic nerve distribution after lifting heavy equipment. MRI demonstrates rupture of the outer fibrocartilage annulus fibrosus, causing the gelatinous nucleus pulposus to protrude into the vertebral canal.',
+        options: ['Herniated (Ruptured) Disc', 'Osteoarthritis', 'Spondylolisthesis', 'Spina Bifida'],
+        correct: 0,
+        explanation: 'Herniated disc occurs when the annulus fibrosus cracks and the nucleus pulposus protrudes onto adjacent spinal nerves.'
+      },
+      {
+        badge: 'Autoimmune Arthritis',
+        badgeClass: 'badge-autoimmune',
+        title: 'Case 2: Bilateral Symmetrical Finger Joint Deformity',
+        desc: 'A 50-year-old female presents with chronic bilateral morning stiffness lasting over an hour. Physical exam shows swollen, warm metacarpophalangeal joints with ulnar deviation. Synovial biopsy shows chronic inflammatory pannus and early bony ankylosis (fusion of bones).',
+        options: ['Osteoarthritis (OA)', 'Rheumatoid Arthritis (RA)', 'Lyme Arthritis', 'Gouty Arthritis'],
+        correct: 1,
+        explanation: 'Rheumatoid arthritis is an autoimmune condition targeting the synovial membrane, causing inflammatory pannus and bony ankylosis.'
+      },
+      {
+        badge: 'Degenerative Cartilage',
+        badgeClass: 'badge-deg',
+        title: 'Case 3: Unilateral Knee Crepitus & Morning Stiffness',
+        desc: 'A 68-year-old retired runner complains of deep, aching pain in his right knee that worsens with prolonged standing and weight-bearing. Radiographs show asymmetric joint space narrowing, subchondral bone sclerosis, and osteophytes due to softening and disintegration of articular hyaline cartilage.',
+        options: ['Osteoarthritis (OA)', 'Rheumatoid Arthritis (RA)', 'Osteoporosis', 'Spina Bifida'],
+        correct: 0,
+        explanation: 'Osteoarthritis is non-inflammatory degenerative wear-and-tear of articular cartilage, often with osteophyte (bone spur) formation.'
+      },
+      {
+        badge: 'Metabolic Bone Density',
+        badgeClass: 'badge-metabolic',
+        title: 'Case 4: Spontaneous Vertebral Compression Fracture',
+        desc: 'A 74-year-old postmenopausal woman experiences sudden mid-back pain without significant trauma. Dual-energy X-ray absorptiometry (DEXA) scan demonstrates a T-score of -3.1, confirming significant porous loss of bone mass and thinning trabeculae due to osteoclast resorption exceeding osteoblast deposition.',
+        options: ['Osteopenia', 'Osteoporosis', 'Kyphosis', 'Lordosis'],
+        correct: 1,
+        explanation: 'Osteoporosis is marked by severe loss of bone mineral density (T-score < -2.5), rendering bones fragile and susceptible to compression fractures.'
+      },
+      {
+        badge: 'Adolescent Curvature',
+        badgeClass: 'badge-curvature',
+        title: 'Case 5: Asymmetric Shoulder Heights & Rib Hump',
+        desc: 'During a middle school athletic screening, a 13-year-old female is noted to have one shoulder visibly lower than the other. On Adams forward bend test, an abnormal lateral curvature of the thoracic spine with rotational rib hump is observed.',
+        options: ['Lordosis', 'Kyphosis', 'Scoliosis', 'Spina Bifida'],
+        correct: 2,
+        explanation: 'Scoliosis is an abnormal lateral curvature of the vertebral column, most prevalent in adolescent girls.'
+      }
+    ];
+
+    function renderClinicalCase() {
+      var item = clinicalCases[appState.caseStep];
+      if (!item) return;
+
+      var b = document.getElementById('case-badge');
+      if (b) {
+        b.className = 'case-badge ' + item.badgeClass;
+        b.textContent = 'Case File ' + (appState.caseStep + 1) + ' of ' + clinicalCases.length + ' (' + item.badge + ')';
+      }
+
+      var t = document.getElementById('case-title');
+      if (t) t.textContent = item.title;
+
+      var d = document.getElementById('case-desc');
+      if (d) d.textContent = item.desc;
+
+      var optBox = document.getElementById('case-options-box');
+      if (optBox) {
+        optBox.innerHTML = '';
+        item.options.forEach(function(optText, idx) {
+          var btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.textContent = optText;
+          btn.onclick = function() { checkClinicalCaseAnswer(idx, btn); };
+          optBox.appendChild(btn);
+        });
+      }
+
+      var fb = document.getElementById('case-feedback');
+      if (fb) fb.className = 'feedback-box';
+
+      var nextBtn = document.getElementById('btn-next-case');
+      if (nextBtn) nextBtn.style.display = 'none';
+    }
+
+    function checkClinicalCaseAnswer(chosenIdx, btn) {
+      var item = clinicalCases[appState.caseStep];
+      var optBox = document.getElementById('case-options-box');
+      if (optBox) {
+        optBox.querySelectorAll('.option-btn').forEach(function(b) {
+          b.disabled = true;
+        });
+      }
+
+      var fb = document.getElementById('case-feedback');
+      if (chosenIdx === item.correct) {
+        btn.classList.add('correct');
+        appState.caseScore++;
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Correct Diagnosis! ' + item.explanation;
+        }
+        addPoints(10);
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect Diagnosis. ' + item.explanation;
+        }
+      }
+
+      var nextBtn = document.getElementById('btn-next-case');
+      if (nextBtn) {
+        nextBtn.style.display = 'inline-flex';
+        if (appState.caseStep === clinicalCases.length - 1) {
+          nextBtn.textContent = 'Complete Clinic Round';
+        }
+      }
+    }
+
+    function nextClinicalCase() {
+      if (appState.caseStep < clinicalCases.length - 1) {
+        appState.caseStep++;
+        renderClinicalCase();
+      } else {
+        addPoints(20, 'std11');
+        var optBox = document.getElementById('case-options-box');
+        if (optBox) {
+          optBox.innerHTML = '<div style="background:#e8f5e9; border: 1px solid var(--tertiary); border-radius: var(--rounded); padding: var(--space-md); text-align: center;">' +
+            '<h4 style="color:var(--tertiary); font-size: 1.25rem;">Clinical Rounds Complete!</h4>' +
+            '<p style="margin-top: 4px;">Score: ' + appState.caseScore + ' / 5 correct diagnoses. Standard 11 Mastered (+20 pts).</p>' +
+            '</div>';
+        }
+        var nextBtn = document.getElementById('btn-next-case');
+        if (nextBtn) nextBtn.style.display = 'none';
+      }
+    }
+
+    /* ==========================================================================
+       COMPREHENSIVE FINAL MASTERY EXAM (10 QUESTIONS)
+       ========================================================================== */
+    var masteryQuestions = [
+      {
+        std: 'Standard 1',
+        q: 'Which of the following describes the accurate hormonal mechanism when blood calcium drops below 8.5 mg/dL?',
+        options: [
+          'Thyroid gland releases calcitonin, stimulating osteoblasts',
+          'Parathyroid glands release PTH, stimulating osteoclasts to dissolve bone matrix',
+          'Pituitary gland releases growth hormone to stop calcium absorption',
+          'Adrenal gland releases aldosterone to excrete calcium in sweat'
+        ],
+        correct: 1,
+        exp: 'Decreased blood Ca²⁺ triggers PTH secretion, which stimulates osteoclasts to resorb bone and release calcium into the bloodstream.'
+      },
+      {
+        std: 'Standard 2',
+        q: 'Large multinucleated cells that originate from fused bone marrow monocytes and break down calcified bone matrix are called:',
+        options: ['Osteoblasts', 'Osteoclasts', 'Osteocytes', 'Chondrocytes'],
+        correct: 1,
+        exp: 'Osteoclasts are multinucleated phagocytic cells derived from monocytes that secrete acid and lysosomal enzymes.'
+      },
+      {
+        std: 'Standard 3',
+        q: 'The patella (kneecap) develops within a tendon adjacent to the knee joint. It is classified as which special type of bone?',
+        options: ['Flat bone', 'Irregular bone', 'Long bone', 'Sesamoid (round) bone'],
+        correct: 3,
+        exp: 'The patella is a classic sesamoid bone—a small, nodular short bone embedded within the quadriceps/patellar tendon.'
+      },
+      {
+        std: 'Standard 4',
+        q: 'In the microscopic architecture of compact bone, osteocytes occupy tiny bony chambers called ________ and exchange nutrients via ________.',
+        options: [
+          'Trabeculae; Haversian canals',
+          'Lacunae; Canaliculi',
+          'Central canals; Perforating fibers',
+          'Lamellae; Endosteum'
+        ],
+        correct: 1,
+        exp: 'Osteocytes sit in lacunae and extend cellular processes through tiny tunnels called canaliculi.'
+      },
+      {
+        std: 'Standard 5',
+        q: 'A large, rounded process at the end of a bone that articulates with another bone (such as on the occipital bone or femur) is designated a:',
+        options: ['Condyle', 'Trochanter', 'Meatus', 'Fossa'],
+        correct: 0,
+        exp: 'A condyle is a rounded articular process that forms a joint with another bone.'
+      },
+      {
+        std: 'Standard 6',
+        q: 'What is the primary anatomical and clinical distinction between sutures and fontanels?',
+        options: [
+          'Sutures are freely movable; fontanels are completely immovable',
+          'Fontanels are fibrous membranes in infants allowing skull compression during birth; sutures are immovable adult interlocking joints',
+          'Fontanels are cartilage joints of the spine; sutures are found only in the pelvis',
+          'Sutures contain red marrow; fontanels contain yellow marrow'
+        ],
+        correct: 1,
+        exp: 'Fontanels are unossified membranous soft spots in infantile skulls; sutures are immovable fibrous joints between adult cranial bones.'
+      },
+      {
+        std: 'Standard 7',
+        q: 'Which of the following bones belongs strictly to the Axial Skeleton?',
+        options: ['Scapula', 'Clavicle', 'Hyoid bone', 'Ilium'],
+        correct: 2,
+        exp: 'The hyoid bone (neck) is part of the axial skeleton (head, neck, and trunk). Scapula, clavicle, and ilium belong to appendicular girdles.'
+      },
+      {
+        std: 'Standard 8',
+        q: 'A patient has an abnormal spine injury at C2 where the head fails to pivot. The anatomical structure allowing the atlas (C1) to pivot is the:',
+        options: ['Vertebra prominens', 'Dens (odontoid process)', 'Costal facet', 'Sacral promontory'],
+        correct: 1,
+        exp: 'The dens (odontoid process) of the axis (C2) extends upward into the ring of the atlas (C1), serving as a pivot for head rotation.'
+      },
+      {
+        std: 'Standard 9 & 10',
+        q: 'Ligaments connect ________ while tendons connect ________:',
+        options: [
+          'Muscle to bone; Bone to bone',
+          'Bone to bone; Muscle to bone',
+          'Cartilage to muscle; Bone to ligament',
+          'Nerve to muscle; Tendon to cartilage'
+        ],
+        correct: 1,
+        exp: 'Ligaments connect bone to bone at joints; tendons attach muscles to bones to transmit contractile movement.'
+      },
+      {
+        std: 'Standard 11',
+        q: 'A congenital defect where the vertebral laminae fail to fuse during embryonic development, potentially allowing spinal cord contents to protrude, is called:',
+        options: ['Kyphosis', 'Lordosis', 'Spina bifida', 'Bony ankylosis'],
+        correct: 2,
+        exp: 'Spina bifida is a failure of posterior vertebral laminae to unite, linked to maternal folic acid deficiency.'
+      }
+    ];
+
+    function renderMasteryQuestion() {
+      var item = masteryQuestions[appState.mqIndex];
+      if (!item) {
+        showMasterySummary();
+        return;
+      }
+
+      document.getElementById('mastery-quiz-card').style.display = 'block';
+      document.getElementById('mastery-summary-card').style.display = 'none';
+
+      document.getElementById('mq-counter').textContent = 'Question ' + (appState.mqIndex + 1) + ' of ' + masteryQuestions.length;
+      document.getElementById('mq-standard-tag').textContent = 'Focus: ' + item.std;
+      document.getElementById('mq-question').textContent = item.q;
+
+      var optList = document.getElementById('mq-options-list');
+      if (optList) {
+        optList.innerHTML = '';
+        item.options.forEach(function(optText, idx) {
+          var btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.textContent = optText;
+          btn.onclick = function() { checkMasteryAnswer(idx, btn); };
+          optList.appendChild(btn);
+        });
+      }
+
+      var fb = document.getElementById('mq-feedback');
+      if (fb) fb.className = 'feedback-box';
+
+      var nextBtn = document.getElementById('mq-next-btn');
+      if (nextBtn) nextBtn.style.display = 'none';
+
+      document.getElementById('mq-score-tracker').textContent = 'Score: ' + appState.mqScore + ' / ' + masteryQuestions.length;
+    }
+
+    function checkMasteryAnswer(chosenIdx, btn) {
+      var item = masteryQuestions[appState.mqIndex];
+      var optList = document.getElementById('mq-options-list');
+      if (optList) {
+        optList.querySelectorAll('.option-btn').forEach(function(b) {
+          b.disabled = true;
+        });
+      }
+
+      var fb = document.getElementById('mq-feedback');
+      if (chosenIdx === item.correct) {
+        btn.classList.add('correct');
+        appState.mqScore++;
+        if (fb) {
+          fb.className = 'feedback-box show feedback-correct';
+          fb.textContent = 'Correct! ' + item.exp;
+        }
+        addPoints(10);
+      } else {
+        btn.classList.add('incorrect');
+        if (fb) {
+          fb.className = 'feedback-box show feedback-wrong';
+          fb.textContent = 'Incorrect. ' + item.exp;
+        }
+      }
+
+      document.getElementById('mq-score-tracker').textContent = 'Score: ' + appState.mqScore + ' / ' + masteryQuestions.length;
+
+      var nextBtn = document.getElementById('mq-next-btn');
+      if (nextBtn) {
+        nextBtn.style.display = 'inline-flex';
+        if (appState.mqIndex === masteryQuestions.length - 1) {
+          nextBtn.textContent = 'View Final Results →';
+        } else {
+          nextBtn.textContent = 'Next Question →';
+        }
+      }
+    }
+
+    function nextMasteryQuestion() {
+      if (appState.mqIndex < masteryQuestions.length - 1) {
+        appState.mqIndex++;
+        renderMasteryQuestion();
+      } else {
+        showMasterySummary();
+      }
+    }
+
+    function showMasterySummary() {
+      document.getElementById('mastery-quiz-card').style.display = 'none';
+      var summaryCard = document.getElementById('mastery-summary-card');
+      if (summaryCard) summaryCard.style.display = 'block';
+
+      var scorePct = Math.round((appState.mqScore / masteryQuestions.length) * 100);
+      document.getElementById('mq-final-score-text').textContent = 'You scored ' + appState.mqScore + ' / ' + masteryQuestions.length + ' (' + scorePct + '%)';
+
+      var msg = document.getElementById('mq-final-msg');
+      if (scorePct >= 80) {
+        msg.textContent = 'Congratulations! You have demonstrated comprehensive mastery across all 11 Utah MAP Strand 5 Skeletal System standards.';
+        // Mark all standards complete
+        for (var i = 1; i <= 11; i++) {
+          appState.completedStandards['std' + i] = true;
+        }
+        addPoints(50);
+      } else {
+        msg.textContent = 'Good effort! Review the study guide sections above, especially the specific standards you missed, and retake the benchmark exam to achieve 80%+ mastery.';
+      }
+      updateGlobalStats();
+    }
+
+    function restartMasteryExam() {
+      appState.mqIndex = 0;
+      appState.mqScore = 0;
+      renderMasteryQuestion();
+    }
+
+    function showCertificateModal() {
+      var modal = document.getElementById('cert-modal');
+      if (modal) modal.classList.add('show');
+    }
+
+    function hideCertificateModal() {
+      var modal = document.getElementById('cert-modal');
+      if (modal) modal.classList.remove('show');
+    }
+
+    // App Initialization
+    window.addEventListener('DOMContentLoaded', async function() {
+      await loadSavedState();
+      inspectMarking();
+      updateOrderNumbers();
+      renderClinicalCase();
+      updateGlobalStats();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    });
+  </script>
+</body>
+</html>
